@@ -5,7 +5,6 @@ Name:		pcre
 Version:	3.9
 Release:	3
 License:	GPL
-Vendor:		Philip Hazel <ph10@cam.ac.uk>
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
 BuildRequires:	autoconf
