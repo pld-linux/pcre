@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	4.4
-Release:	2
+Release:	3
 License:	Free to use (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
@@ -133,7 +133,9 @@ Dokumentacja dla PCRE w formacie HTML.
 %{__aclocal}
 %{__autoconf}
 %configure \
-	--enable-shared
+	--enable-shared \
+	--enable-utf8
+
 %{__make}
 
 %install
