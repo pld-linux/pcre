@@ -8,6 +8,7 @@ License:	GPL
 Vendor:		Philip Hazel <ph10@cam.ac.uk>
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
+# Source0-md5:	26b918bfab43cd16d173460354ab9442
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
