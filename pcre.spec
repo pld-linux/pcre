@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	3.9
-Release:	2
+Release:	3
 License:	GPL
 Vendor:		Philip Hazel <ph10@cam.ac.uk>
 Group:		Libraries
@@ -119,11 +119,10 @@ install -d $RPM_BUILD_ROOT/lib
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 mv -f $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* $RPM_BUILD_ROOT/lib
-(cd $RPM_BUILD_ROOT%{_libdir}
-ln -sf ../../lib/libpcre.so.*.*.* libpcre.so
-ln -sf ../../lib/libpcreposix.so.*.*.* libpcreposix.so)
 
-gzip -9nf README NEWS
+cd $RPM_BUILD_ROOT%{_libdir}
+ln -sf /lib/`cd ../../lib ; echo libpcre.so.*.*.*` libpcre.so
+ln -sf /lib/`cd ../../lib ; echo libpcreposix.so.*.*.*` libpcreposix.so
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -133,11 +132,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc README NEWS
 %attr(755,root,root) /lib/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%doc *.gz
 %attr(755,root,root) %{_bindir}/pcre-config
 %attr(755,root,root) %{_libdir}/lib*.so
 %attr(755,root,root) %{_libdir}/lib*.la
