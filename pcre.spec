@@ -3,12 +3,13 @@ Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	3.9
-Release:	3
+Release:	4
 License:	GPL
 Vendor:		Philip Hazel <ph10@cam.ac.uk>
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
 # Source0-md5:	26b918bfab43cd16d173460354ab9442
+BuildRequires:	libtool
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -107,6 +108,7 @@ perlowych wyra¿eñ regularnych, a nie posiksowych.
 %setup -q
 
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %configure \
