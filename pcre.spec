@@ -61,7 +61,6 @@ instead of POSIX regular expressions.
 %setup -q
 
 %build
-LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-shared
 %{__make}
@@ -71,11 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
-strip $RPM_BUILD_ROOT%{_bindir}/pcregrep
-
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/* \
-	README NEWS
+gzip -9nf README NEWS
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
