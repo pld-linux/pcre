@@ -1,7 +1,7 @@
 Summary:	Perl-Compatible Regular Expression library
 Name:		pcre
-Version:	3.1
-Release:	3
+Version:	3.2
+Release:	1
 License:	GPL
 Group:		Libraries
 Group(fr):	Librairies
@@ -62,6 +62,7 @@ instead of POSIX regular expressions.
 %patch -p1
 
 %build
+LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-shared
 %{__make}
