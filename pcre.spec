@@ -1,78 +1,100 @@
-%define name	pcre
-%define version	2.08
-%define release	1
-
 Summary:	Perl-Compatible Regular Expression library
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-Copyright:	GPL
-Group:		Development/Libraries
+Name:		pcre
+Version:	3.1
+Release:	1
+License:	GPL
+Group:		Libraries
+Group(fr):	Librairies
+Group(pl):	Biblioteki
 Vendor:		Philip Hazel <ph10@cam.ac.uk>
-Source: ftp://ftp.cus.cam.ac.uk/pub/software/programs/pcre/pcre-%{version}.tar.gz
-Patch: pcre-make.patch
-Packager:	Damien Miller <dmiller@ilogic.com.au>
-BuildRoot:	/tmp/%{name}-%{version}
-
-%package -n pgrep
-Summary: Grep using Perl Compatible Regular Expressions
-Group:		Utilities/Text
+Source:		ftp://ftp.cus.cam.ac.uk/pub/software/programs/pcre/pcre-%{version}.tar.gz
+patch:		pcre-DESTDIR.patch
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
-
-PCRE stands for the Perl Compatible Regular Expression library. It 
+PCRE stands for the Perl Compatible Regular Expression library. It
 contains routines to match text against regular expressions similar to
 perl's. It also contains a POSIX compatibility library.
 
-%description -n pgrep
+%package devel
+Summary:	Perl-Compatible Regular Expression header files and development documentation
+Summary(pl):	Pliki nag³ówkowe i dokumentacja do blibliotek pcre
+Group:		Development/Libraries
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name} = %{version}
 
-pgrep is a grep workalike which uses perl-style regular expressions 
+%description devel
+Perl-Compatible Regular Expression header files and development
+documentation.
+
+%description -l pl devel
+Pliki nag³ówkowe i dokumentacja do blibliotek pcre.
+
+%package static
+Summary:	Perl-Compatible Regular Expression static libraries
+Summary(pl):	Biblioteki statyczne pcre
+Group:		Development/Libraries
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name}-devel = %{version}
+
+%description static
+Perl-Compatible Regular Expression library staic libraris.
+
+%description -l pl static
+Biblioteki statyczne pcre.
+
+%package -n pgrep
+Summary:	Grep using Perl Compatible Regular Expressions
+Group:		Utilities/Text
+Group(fr):	Utilitaires/Texte
+Group(pl):	Narzêdzia/Tekst
+
+%description -n pgrep
+pgrep is a grep workalike which uses perl-style regular expressions
 instead of POSIX regular expressions.
 
 %prep
-
-%setup
-
-%patch -p0
+%setup -q
+%patch -p1
 
 %build
-make CFLAGS="$RPM_OPT_FLAGS"
+%configure \
+	--enable-shared
+make
 
 %install
-mkdir -p $RPM_BUILD_ROOT/usr/bin
-mkdir -p $RPM_BUILD_ROOT/usr/lib
-mkdir -p $RPM_BUILD_ROOT/usr/include
-mkdir -p $RPM_BUILD_ROOT/usr/man/man1
-mkdir -p $RPM_BUILD_ROOT/usr/man/man3
-install libpcre.a $RPM_BUILD_ROOT/usr/lib
-install libpcreposix.a $RPM_BUILD_ROOT/usr/lib
-install pcre.h $RPM_BUILD_ROOT/usr/include
-install pcreposix.h $RPM_BUILD_ROOT/usr/include
-install pcre.3 $RPM_BUILD_ROOT/usr/man/man3
-install pcreposix.3 $RPM_BUILD_ROOT/usr/man/man3
-install pgrep $RPM_BUILD_ROOT/usr/bin
-install pgrep.1 $RPM_BUILD_ROOT/usr/man/man1
+rm -rf $RPM_BUILD_ROOT
+
+make install DESTDIR=$RPM_BUILD_ROOT
+
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
+strip $RPM_BUILD_ROOT%{_bindir}/pgrep
+
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/* \
+	README NEWS
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(-,root,root)
-%doc LICENCE README Tech.Notes
-%attr(0644,root,root) /usr/lib/libpcre.a
-%attr(0644,root,root) /usr/lib/libpcreposix.a
-%attr(0644,root,root) /usr/man/man3/pcre.3
-%attr(0644,root,root) /usr/man/man3/pcreposix.3
-%attr(0644,root,root) /usr/include/pcre.h
-%attr(0644,root,root) /usr/include/pcreposix.h
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
+
+%files devel
+%defattr(644,root,root,755)
+%doc *.gz
+%attr(755,root,root) %{_bindir}/pcre-config
+%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.la
+%{_mandir}/man3/*
+%{_includedir}/*
+
+%files static
+%attr(644,root,root) %{_libdir}/lib*.a
 
 %files -n pgrep
-%defattr(-,root,root)
-%attr(0755,root,root) /usr/bin/pgrep
-%attr(0644,root,root) /usr/man/man1/pgrep.1
-
-%changelog
-* Thu Sep 09 1999 Damien Miller <dmiller@ilogic.com.au>
-- Updated to v2.08
-* Fri May 28 1999 Damien Miller <dmiller@ilogic.com.au>
-- Built RPMs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pgrep
+%{_mandir}/man1/pgrep.1*
