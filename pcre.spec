@@ -1,7 +1,7 @@
 Summary:	Perl-Compatible Regular Expression library
 Name:		pcre
 Version:	3.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Libraries
 Group(fr):	Librairies
