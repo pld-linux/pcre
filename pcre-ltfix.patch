@@ -1,0 +1,11 @@
+--- pcre-4.1/Makefile.in.orig	2003-03-12 17:17:38.000000000 +0100
++++ pcre-4.1/Makefile.in	2003-04-20 23:43:56.000000000 +0200
+@@ -101,7 +101,7 @@
+ 
+ libpcreposix.la: pcreposix.o
+ 		-rm -f libpcreposix.la
+-		$(LINK) -rpath $(LIBDIR) -L. -lpcre -version-info \
++		$(LINK) -rpath $(LIBDIR) libpcre.la -version-info \
+ 		'$(PCREPOSIXLIBVERSION)' -o libpcreposix.la pcreposix.lo
+ 
+ pcre.o:         $(top_srcdir)/chartables.c $(top_srcdir)/pcre.c \

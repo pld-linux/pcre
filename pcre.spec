@@ -3,10 +3,11 @@ Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	4.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
+Patch0:		%{name}-ltfix.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -16,7 +17,7 @@ Obsoletes:	libpcre0
 %description
 PCRE stands for the Perl Compatible Regular Expression library. It
 contains routines to match text against regular expressions similar to
-perl's. It also contains a POSIX compatibility library.
+Perl's. It also contains a POSIX compatibility library.
 
 %description -l es
 A biblioteca PCRE é um set de funções que implementam expressões
@@ -27,7 +28,7 @@ corresponder ao padrão POSIX de expressões regulares.
 %description -l pl
 PCRE (Perl-Compatible Regular Expression) oznacza bibliotekê wyra¿eñ
 regularnych kompatybilnych z perlowymi. Zawiera funkcje dopasowuj±ce
-tekst do wyra¿eñ regularnych podobnych do tych znanych z perla.
+tekst do wyra¿eñ regularnych podobnych do tych znanych z Perla.
 Zawiera tak¿e bibliotekê kompatybiln± z POSIX.
 
 %description -l pt_BR
@@ -55,7 +56,7 @@ sua própria API nativa, bem como um set de funções wrapper para
 corresponder ao padrão POSIX de expressões regulares.
 
 %description devel -l pl
-Pliki nag³ówkowe i dokumentacja do blibliotek pcre.
+Pliki nag³ówkowe i dokumentacja do bibliotek pcre.
 
 %description devel -l pt_BR
 A biblioteca PCRE é um conjunto de funções que implementam expressões
@@ -71,7 +72,7 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}
 
 %description static
-Perl-Compatible Regular Expression library staic libraris.
+Perl-Compatible Regular Expression library static libraries.
 
 %description static -l es
 A biblioteca PCRE é um set de funções que implementam expressões
@@ -104,6 +105,7 @@ perlowych wyra¿eñ regularnych, a nie posiksowych.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 %{__libtoolize}
