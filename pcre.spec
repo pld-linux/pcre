@@ -107,7 +107,7 @@ perlowych wyra¿eñ regularnych, a nie posiksowych.
 
 %build
 aclocal
-autoconf
+%{__autoconf}
 %configure \
 	--enable-shared
 %{__make}
