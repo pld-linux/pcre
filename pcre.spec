@@ -138,7 +138,7 @@ Dokumentacja dla PCRE w formacie HTML.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/lib
+install -d $RPM_BUILD_ROOT{/lib,%{_examplesdir}/%{name}-%{version}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -148,6 +148,9 @@ mv -f $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* $RPM_BUILD_ROOT/lib
 cd $RPM_BUILD_ROOT%{_libdir}
 ln -sf /lib/`cd ../../lib ; echo libpcre.so.*.*.*` libpcre.so
 ln -sf /lib/`cd ../../lib ; echo libpcreposix.so.*.*.*` libpcreposix.so
+
+cd -
+install pcredemo.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -162,12 +165,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc pcredemo.c
 %attr(755,root,root) %{_bindir}/pcre-config
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
 %{_mandir}/man3/*
 %{_includedir}/*
+%{_examplesdir}/*
 
 %files static
 %defattr(644,root,root,755)
