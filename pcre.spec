@@ -105,6 +105,7 @@ perlowych wyra¿eñ regularnych, a nie posiksowych.
 %setup -q
 
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %configure \
