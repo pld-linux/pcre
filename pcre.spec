@@ -4,7 +4,7 @@ Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	4.4
 Release:	2
-License:	GPL
+License:	Free to use (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
 # Source0-md5:	89fc389191d9611b314c3fc23235377b
@@ -145,7 +145,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README NEWS
+%doc README NEWS LICENCE
 %attr(755,root,root) /lib/lib*.so.*.*
 
 %files devel
