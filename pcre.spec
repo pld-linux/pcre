@@ -115,15 +115,15 @@ pcretest is a program which you can use to test regular expression
 pcretest jest programem za pomoc± mo¿na sprawdziæ poprawno¶æ wyra¿enia regularnego
 
 %package doc-html
-Summary:	Documentation for PCRE in html format
-Summary(pl):	Dokumentacja dla PCRE w formacie html
+Summary:	Documentation for PCRE in HTML format
+Summary(pl):	Dokumentacja dla PCRE w formacie HTML
 Group:		Applications/Text
 
 %description doc-html
-Documentation for PCRE in html format.
+Documentation for PCRE in HTML format.
 
 %description doc-html -l pl
-Dokumentacja dla PCRE w formacie html.
+Dokumentacja dla PCRE w formacie HTML.
 
 %prep
 %setup -q
@@ -140,7 +140,8 @@ Dokumentacja dla PCRE w formacie html.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/lib
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 mv -f $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* $RPM_BUILD_ROOT/lib
 
