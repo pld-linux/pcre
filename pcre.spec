@@ -1,7 +1,7 @@
 Summary:	Perl-Compatible Regular Expression library
 Name:		pcre
-Version:	3.4
-Release:	3
+Version:	3.5
+Release:	1
 License:	GPL
 Group:		Libraries
 Group(de):	Libraries
@@ -9,7 +9,7 @@ Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Vendor:		Philip Hazel <ph10@cam.ac.uk>
-Source0:	ftp://ftp.cus.cam.ac.uk/pub/software/programs/pcre/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.gz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
