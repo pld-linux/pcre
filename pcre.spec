@@ -7,13 +7,6 @@ Release:	1
 License:	GPL
 Vendor:		Philip Hazel <ph10@cam.ac.uk>
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -47,13 +40,6 @@ Summary:	Perl-Compatible Regular Expression header files and development documen
 Summary(pl):	Pliki nagЁСwkowe i dokumentacja do bibliotek pcre
 Summary(pt_BR):	Arquivos para desenvolvimento com pcre
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -80,13 +66,6 @@ Summary:	Perl-Compatible Regular Expression static libraries
 Summary(pl):	Biblioteki statyczne pcre
 Summary(pt_BR):	Arquivos para desenvolvimento estАtico com pcre
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -111,9 +90,6 @@ corresponder ao padrЦo POSIX de expressУes regulares.
 Summary:	Grep using Perl Compatible Regular Expressions
 Summary(pl):	Grep u©ywaj╠cy perlowych wyra©eЯ regularnych
 Group:		Applications/Text
-Group(de):	Applikationen/Text
-Group(fr):	Utilitaires/Texte
-Group(pl):	Aplikacje/Tekst
 Obsoletes:	pgrep
 
 %description -n pcregrep
