@@ -1,6 +1,6 @@
 Summary:	Perl-Compatible Regular Expression library
 Name:		pcre
-Version:	3.2
+Version:	3.4
 Release:	1
 License:	GPL
 Group:		Libraries
@@ -8,7 +8,6 @@ Group(fr):	Librairies
 Group(pl):	Biblioteki
 Vendor:		Philip Hazel <ph10@cam.ac.uk>
 Source0:	ftp://ftp.cus.cam.ac.uk/pub/software/programs/pcre/%{name}-%{version}.tar.gz
-Patch0:		pcre-DESTDIR.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libdir		/lib
@@ -47,19 +46,19 @@ Perl-Compatible Regular Expression library staic libraris.
 %description -l pl static
 Biblioteki statyczne pcre.
 
-%package -n pgrep
+%package -n pcregrep
 Summary:	Grep using Perl Compatible Regular Expressions
 Group:		Utilities/Text
 Group(fr):	Utilitaires/Texte
 Group(pl):	Narzêdzia/Tekst
+Obsoletes:	pgrep
 
-%description -n pgrep
+%description -n pcregrep
 pgrep is a grep workalike which uses perl-style regular expressions
 instead of POSIX regular expressions.
 
 %prep
 %setup -q
-%patch -p1
 
 %build
 LDFLAGS="-s"; export LDFLAGS
@@ -73,7 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
-strip $RPM_BUILD_ROOT%{_bindir}/pgrep
+strip $RPM_BUILD_ROOT%{_bindir}/pcregrep
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/* \
 	README NEWS
@@ -101,7 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
 
-%files -n pgrep
+%files -n pcregrep
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/pgrep
-%{_mandir}/man1/pgrep.1*
+%attr(755,root,root) %{_bindir}/pcregrep
+%{_mandir}/man1/pcregrep.1*
