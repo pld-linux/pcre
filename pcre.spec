@@ -9,7 +9,7 @@ Group(pl):	Biblioteki
 Vendor:		Philip Hazel <ph10@cam.ac.uk>
 Source:		ftp://ftp.cus.cam.ac.uk/pub/software/programs/pcre/pcre-%{version}.tar.gz
 patch:		pcre-DESTDIR.patch
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 PCRE stands for the Perl Compatible Regular Expression library. It
