@@ -2,13 +2,12 @@ Summary:	Perl-Compatible Regular Expression library
 Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	4.3
-Release:	1.1
+Version:	4.4
+Release:	1
 License:	GPL
 Group:		Libraries
-# Source0-md5:	7bc7d5b590a41e6f9ede30f272002a02
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-ltfix.patch
+# Source0-md5:	89fc389191d9611b314c3fc23235377b
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -117,7 +116,6 @@ pcretest jest programem za pomoc± mo¿na sprawdziæ poprawno¶æ wyra¿enia regularne
 
 %prep
 %setup -q
-%patch -p1
 
 %build
 %{__libtoolize}
