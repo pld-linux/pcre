@@ -5,6 +5,7 @@ Name:		pcre
 Version:	3.7
 Release:	2
 License:	GPL
+Vendor:		Philip Hazel <ph10@cam.ac.uk>
 Group:		Libraries
 Group(de):	Libraries
 Group(es):	Bibliotecas
@@ -13,8 +14,7 @@ Group(pl):	Biblioteki
 Group(pt_BR):	Bibliotecas
 Group(ru):	Библиотеки
 Group(uk):	Б╕бл╕отеки
-Vendor:		Philip Hazel <ph10@cam.ac.uk>
-Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
