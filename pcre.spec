@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	5.0
-Release:	2
+Release:	3
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
