@@ -140,16 +140,16 @@ Dokumentacja dla PCRE w formacie HTML.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/lib,%{_examplesdir}/%{name}-%{version}}
+install -d $RPM_BUILD_ROOT{/%{_lib},%{_examplesdir}/%{name}-%{version}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv -f $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* $RPM_BUILD_ROOT/lib
+mv -f $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* $RPM_BUILD_ROOT/%{_lib}
 
 cd $RPM_BUILD_ROOT%{_libdir}
-ln -sf /lib/`cd ../../lib ; echo libpcre.so.*.*.*` libpcre.so
-ln -sf /lib/`cd ../../lib ; echo libpcreposix.so.*.*.*` libpcreposix.so
+ln -sf /%{_lib}/`cd ../../%{_lib} ; echo libpcre.so.*.*.*` libpcre.so
+ln -sf /%{_lib}/`cd ../../%{_lib} ; echo libpcreposix.so.*.*.*` libpcreposix.so
 
 cd -
 install pcredemo.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -163,7 +163,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README NEWS LICENCE
-%attr(755,root,root) /lib/lib*.so.*.*
+%attr(755,root,root) /%{_lib}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
