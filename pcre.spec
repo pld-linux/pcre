@@ -106,7 +106,7 @@ perlowych wyra¿eñ regularnych, a nie posiksowych.
 %setup -q
 
 %build
-aclocal
+%{__aclocal}
 %{__autoconf}
 %configure \
 	--enable-shared
