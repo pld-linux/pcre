@@ -2,12 +2,12 @@ Summary:	Perl-Compatible Regular Expression library
 Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	4.5
-Release:	2
+Version:	5.0
+Release:	1
 License:	Free to use (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
-# Source0-md5:	c51bd34197008b128046f0799d2242e4
+# Source0-md5:	813850808894d99fb5b1c41ec6335d4f
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
