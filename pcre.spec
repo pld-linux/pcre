@@ -1,7 +1,7 @@
 Summary:	Perl-Compatible Regular Expression library
 Name:		pcre
 Version:	3.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		Libraries
 Group(fr):	Librairies
@@ -74,6 +74,9 @@ strip $RPM_BUILD_ROOT%{_bindir}/pgrep
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man?/* \
 	README NEWS
+
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
