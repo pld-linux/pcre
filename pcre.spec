@@ -11,6 +11,8 @@ Source:		ftp://ftp.cus.cam.ac.uk/pub/software/programs/pcre/pcre-%{version}.tar.
 patch:		pcre-DESTDIR.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_libdir		/lib
+
 %description
 PCRE stands for the Perl Compatible Regular Expression library. It
 contains routines to match text against regular expressions similar to
