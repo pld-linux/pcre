@@ -106,7 +106,7 @@ perlowych wyra¿eñ regularnych, a nie posiksowych.
 
 %package -n pcretest
 Summary:	A program for testing Perl-comaptible regular expressions
-Summary(pl):	Program do testowania kompatybilnych z perlem wyra¿eñ regualarnych 
+Summary(pl):	Program do testowania kompatybilnych z perlem wyra¿eñ regualarnych
 Group:		Applications/Text
 
 %description -n pcretest
