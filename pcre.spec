@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	3.9
-Release:	1
+Release:	2
 License:	GPL
 Vendor:		Philip Hazel <ph10@cam.ac.uk>
 Group:		Libraries
@@ -11,6 +11,7 @@ Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	libpcre0
 
 %description
 PCRE stands for the Perl Compatible Regular Expression library. It
@@ -41,6 +42,7 @@ Summary(pl):	Pliki nag³ówkowe i dokumentacja do bibliotek pcre
 Summary(pt_BR):	Arquivos para desenvolvimento com pcre
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
+Obsoletes:	libpcre0-devel
 
 %description devel
 Perl-Compatible Regular Expression header files and development
