@@ -172,6 +172,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.la
 %{_mandir}/man3/*
 %{_includedir}/*
+%{_pkgconfigdir}/libpcre.pc
 %{_examplesdir}/*
 
 %files static
