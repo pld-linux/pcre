@@ -2,7 +2,7 @@ Summary:	Perl-Compatible Regular Expression library
 Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	4.0
+Version:	4.1
 Release:	1
 License:	GPL
 Group:		Libraries
