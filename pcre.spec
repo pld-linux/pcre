@@ -7,8 +7,8 @@ Group:		Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Vendor:		Philip Hazel <ph10@cam.ac.uk>
-Source:		ftp://ftp.cus.cam.ac.uk/pub/software/programs/pcre/pcre-%{version}.tar.gz
-patch:		pcre-DESTDIR.patch
+Source0:	ftp://ftp.cus.cam.ac.uk/pub/software/programs/pcre/%{name}-%{version}.tar.gz
+Patch0:		pcre-DESTDIR.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libdir		/lib
@@ -97,7 +97,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*
 
 %files static
-%attr(644,root,root) %{_libdir}/lib*.a
+%defattr(644,root,root,755)
+%{_libdir}/lib*.a
 
 %files -n pgrep
 %defattr(644,root,root,755)
