@@ -7,6 +7,7 @@ Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
+# Source0-md5:	2a11a3f26e7689f5e70f9baad0813e7c
 Patch0:		%{name}-ltfix.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
