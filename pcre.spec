@@ -46,16 +46,16 @@ Requires:	%{name} = %{version}
 Perl-Compatible Regular Expression header files and development
 documentation.
 
-%description -l es devel
+%description devel -l es
 A biblioteca PCRE é um set de funções que implementam expressões
 regulares utilizando-se da mesma sintaxe e semântica do perl 5. Possui
 sua própria API nativa, bem como um set de funções wrapper para
 corresponder ao padrão POSIX de expressões regulares.
 
-%description -l pl devel
+%description devel -l pl
 Pliki nag³ówkowe i dokumentacja do blibliotek pcre.
 
-%description -l pt_BR devel
+%description devel -l pt_BR
 A biblioteca PCRE é um conjunto de funções que implementam expressões
 regulares utilizando-se da mesma sintaxe e semântica do perl 5. Possui
 sua própria API nativa, bem como um conjunto de funções wrapper para
@@ -71,16 +71,16 @@ Requires:	%{name}-devel = %{version}
 %description static
 Perl-Compatible Regular Expression library staic libraris.
 
-%description -l es static 
+%description static -l es
 A biblioteca PCRE é um set de funções que implementam expressões
 regulares utilizando-se da mesma sintaxe e semântica do perl 5. Possui
 sua própria API nativa, bem como um set de funções wrapper para
 corresponder ao padrão POSIX de expressões regulares.
 
-%description -l pl static
+%description static -l pl
 Biblioteki statyczne pcre.
 
-%description -l pt_BR static
+%description static -l pt_BR
 A biblioteca PCRE é um conjunto de funções que implementam expressões
 regulares utilizando-se da mesma sintaxe e semântica do perl 5. Possui
 sua própria API nativa, bem como um conjunto de funções wrapper para
