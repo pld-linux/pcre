@@ -3,7 +3,7 @@ Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	4.3
-Release:	1
+Release:	1.1
 License:	GPL
 Group:		Libraries
 # Source0-md5:	7bc7d5b590a41e6f9ede30f272002a02
@@ -104,6 +104,17 @@ instead of POSIX regular expressions.
 pgrep jest programem dzia³aj±cym podobnie do grepa, ale u¿ywaj±cych
 perlowych wyra¿eñ regularnych, a nie posiksowych.
 
+%package -n pcretest
+Summary:	A program for testing Perl-comaptible regular expressions
+Summary(pl):	Program do testowania kompatybilnych z perlem wyra¿eñ regualarnych 
+Group:		Applications/Text
+
+%description -n pcretest
+pcretest is a program which you can use to test regular expression
+
+%description -n pcretest -l pl
+pcretest jest programem za pomoc± mo¿na sprawdziæ poprawno¶æ wyra¿enia regularnego
+
 %prep
 %setup -q
 %patch -p1
@@ -155,3 +166,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pcregrep
 %{_mandir}/man1/pcregrep.1*
+
+%files -n pcretest
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pcretest
+%{_mandir}/man1/pcretest.1*
