@@ -1,9 +1,11 @@
 Summary:	Perl-Compatible Regular Expression library
 Name:		pcre
 Version:	3.4
-Release:	2
+Release:	3
 License:	GPL
 Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Vendor:		Philip Hazel <ph10@cam.ac.uk>
@@ -19,6 +21,7 @@ perl's. It also contains a POSIX compatibility library.
 Summary:	Perl-Compatible Regular Expression header files and development documentation
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do blibliotek pcre
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
@@ -34,6 +37,7 @@ Pliki nag³ówkowe i dokumentacja do blibliotek pcre.
 Summary:	Perl-Compatible Regular Expression static libraries
 Summary(pl):	Biblioteki statyczne pcre
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
@@ -46,9 +50,10 @@ Biblioteki statyczne pcre.
 
 %package -n pcregrep
 Summary:	Grep using Perl Compatible Regular Expressions
-Group:		Utilities/Text
+Group:		Applications/Text
+Group(de):	Applikationen/Text
 Group(fr):	Utilitaires/Texte
-Group(pl):	Narzêdzia/Tekst
+Group(pl):	Aplikacje/Tekst
 Obsoletes:	pgrep
 
 %description -n pcregrep
@@ -59,6 +64,8 @@ instead of POSIX regular expressions.
 %setup -q
 
 %build
+aclocal
+autoconf
 %configure \
 	--enable-shared
 %{__make}
