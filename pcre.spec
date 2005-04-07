@@ -8,6 +8,7 @@ License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
 # Source0-md5:	813850808894d99fb5b1c41ec6335d4f
+URL:		http://www.pcre.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
