@@ -2,18 +2,20 @@ Summary:	Perl-Compatible Regular Expression library
 Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	5.0
-Release:	3
+Version:	6.0
+Release:	1
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
-# Source0-md5:	813850808894d99fb5b1c41ec6335d4f
+# Source0-md5:	9352eb6d2be5ad9d8360d2377d3cafac
+Patch0:		%{name}-cxx.patch
 URL:		http://www.pcre.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
-BuildRequires:	libtool
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	libstdc++-devel
+BuildRequires:	libtool >= 2:1.5
 Obsoletes:	libpcre0
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 PCRE stands for the Perl Compatible Regular Expression library. It
@@ -43,7 +45,7 @@ Summary:	Perl-Compatible Regular Expression header files and development documen
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do bibliotek pcre
 Summary(pt_BR):	Arquivos para desenvolvimento com pcre
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	libpcre0-devel
 
 %description devel
@@ -70,7 +72,7 @@ Summary:	Perl-Compatible Regular Expression static libraries
 Summary(pl):	Biblioteki statyczne pcre
 Summary(pt_BR):	Arquivos para desenvolvimento estático com pcre
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Perl-Compatible Regular Expression library static libraries.
@@ -89,6 +91,44 @@ A biblioteca PCRE é um conjunto de funções que implementam expressões
 regulares utilizando-se da mesma sintaxe e semântica do perl 5. Possui
 sua própria API nativa, bem como um conjunto de funções wrapper para
 corresponder ao padrão POSIX de expressões regulares.
+
+%package cxx
+Summary:	C++ wrapper to PCRE library
+Summary(pl):	Interfejs C++ do biblioteki PCRE
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description cxx
+C++ wrapper to PCRE library.
+
+%description cxx -l pl
+Interfejs C++ do biblioteki PCRE.
+
+%package cxx-devel
+Summary:	Header file for C++ wrapper to PCRE library
+Summary(pl):	Plik nag³ówkowy interfejsu C++ do biblioteki PCRE
+Group:		Development/Libraries
+Requires:	%{name}-cxx = %{version}-%{release}
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	libstdc++-devel
+
+%description cxx-devel
+Header file for C++ wrapper to PCRE library.
+
+%description cxx-devel -l pl
+Plik nag³ówkowy interfejsu C++ do biblioteki PCRE.
+
+%package cxx-static
+Summary:	Static version of pcrecpp library
+Summary(pl):	Statyczna wersja biblioteki pcrecpp
+Group:		Development/Libraries
+Requires:	%{name}-cxx-devel = %{version}-%{release}
+
+%description cxx-static
+Static version of pcrecpp library.
+
+%description cxx-static -l pl
+Statyczna wersja biblioteki pcrecpp.
 
 %package -n pcregrep
 Summary:	Grep using Perl Compatible Regular Expressions
@@ -128,6 +168,7 @@ Dokumentacja dla PCRE w formacie HTML.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -146,7 +187,8 @@ install -d $RPM_BUILD_ROOT{/%{_lib},%{_examplesdir}/%{name}-%{version}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv -f $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.* $RPM_BUILD_ROOT/%{_lib}
+mv -f $RPM_BUILD_ROOT%{_libdir}/libpcre.so.*.* $RPM_BUILD_ROOT/%{_lib}
+mv -f $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so.*.* $RPM_BUILD_ROOT/%{_lib}
 
 cd $RPM_BUILD_ROOT%{_libdir}
 ln -sf /%{_lib}/`cd ../../%{_lib} ; echo libpcre.so.*.*.*` libpcre.so
@@ -161,24 +203,50 @@ rm -rf $RPM_BUILD_ROOT
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
+%post   cxx -p /sbin/ldconfig
+%postun cxx -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc README NEWS LICENCE
-%attr(755,root,root) /%{_lib}/lib*.so.*.*
+%attr(755,root,root) /%{_lib}/libpcre.so.*.*
+%attr(755,root,root) /%{_lib}/libpcreposix.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pcre-config
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_mandir}/man3/*
-%{_includedir}/*
+%attr(755,root,root) %{_libdir}/libpcre.so
+%attr(755,root,root) %{_libdir}/libpcreposix.so
+%{_libdir}/libpcre.la
+%{_libdir}/libpcreposix.la
+%{_includedir}/pcre.h
+%{_includedir}/pcreposix.h
 %{_pkgconfigdir}/libpcre.pc
-%{_examplesdir}/*
+%{_mandir}/man3/*
+%exclude %{_mandir}/man3/pcrecpp.3*
+%{_examplesdir}/%{name}-%{version}
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libpcre.a
+%{_libdir}/libpcreposix.a
+
+%files cxx
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpcrecpp.so.*.*.*
+
+%files cxx-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpcrecpp.so
+%{_libdir}/libpcrecpp.la
+%{_includedir}/pcrecpp.h
+%{_includedir}/pcre_scanner.h
+%{_includedir}/pcre_stringpiece.h
+%{_mandir}/man3/pcrecpp.3*
+
+%files cxx-static
+%defattr(644,root,root,755)
+%{_libdir}/libpcrecpp.a
 
 %files -n pcregrep
 %defattr(644,root,root,755)
