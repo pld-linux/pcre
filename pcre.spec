@@ -1,13 +1,17 @@
+#
+# Conditional build:
+%bcond_without	static_libs # don't build static libraries
+#
 Summary:	Perl-Compatible Regular Expression library
 Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	6.0
+Version:	6.1
 Release:	1
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
-# Source0-md5:	9352eb6d2be5ad9d8360d2377d3cafac
+# Source0-md5:	069a8c34df7ec4bd0dad8f26c64c9dd3
 Patch0:		%{name}-cxx.patch
 URL:		http://www.pcre.org/
 BuildRequires:	autoconf >= 2.57
@@ -175,7 +179,7 @@ Dokumentacja dla PCRE w formacie HTML.
 %{__aclocal}
 %{__autoconf}
 %configure \
-	--enable-shared \
+	%{!?with_static_libs:--enable-static=no} \
 	--enable-utf8
 
 %{__make}
@@ -226,10 +230,12 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_mandir}/man3/pcrecpp.3*
 %{_examplesdir}/%{name}-%{version}
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libpcre.a
 %{_libdir}/libpcreposix.a
+%endif
 
 %files cxx
 %defattr(644,root,root,755)
@@ -244,9 +250,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/pcre_stringpiece.h
 %{_mandir}/man3/pcrecpp.3*
 
+%if %{with static_libs}
 %files cxx-static
 %defattr(644,root,root,755)
 %{_libdir}/libpcrecpp.a
+%endif
 
 %files -n pcregrep
 %defattr(644,root,root,755)
