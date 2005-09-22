@@ -10,8 +10,8 @@ Version:	6.4
 Release:	1
 License:	BSD (see LICENCE)
 Group:		Libraries
-Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.gz
-# Source0-md5:	06608f8438d034f570cc1c0b63091ee2
+Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
+# Source0-md5:	c5c73e8767479e8a7751324b0aa32291
 URL:		http://www.pcre.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
