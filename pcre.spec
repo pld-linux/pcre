@@ -177,6 +177,7 @@ Dokumentacja dla PCRE w formacie HTML.
 %{__aclocal}
 %{__autoconf}
 %configure \
+	CXXLDFLAGS="%{rpmldflags}" \
 	%{!?with_static_libs:--enable-static=no} \
 	--enable-utf8
 
