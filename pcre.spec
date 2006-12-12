@@ -7,7 +7,7 @@ Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	6.7
-Release:	2
+Release:	3
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
@@ -179,7 +179,8 @@ Dokumentacja dla PCRE w formacie HTML.
 %configure \
 	CXXLDFLAGS="%{rpmldflags}" \
 	%{!?with_static_libs:--enable-static=no} \
-	--enable-utf8
+	--enable-utf8 \
+	--enable-unicode-properties
 
 %{__make}
 
