@@ -6,12 +6,12 @@ Summary:	Perl-Compatible Regular Expression library
 Summary(pl):	Biblioteka perlowych wyra¿eñ regularnych
 Summary(pt_BR):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	6.7
-Release:	3
+Version:	7.0
+Release:	1
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
-# Source0-md5:	dbbec9d178ce199e67e98c9a4f994f90
+# Source0-md5:	b97e3bb84bd665e0fbb7a90344d65a43
 URL:		http://www.pcre.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
@@ -249,6 +249,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/pcre_scanner.h
 %{_includedir}/pcre_stringpiece.h
 %{_includedir}/pcrecpparg.h
+%{_pkgconfigdir}/libpcrecpp.pc
 %{_mandir}/man3/pcrecpp.3*
 
 %if %{with static_libs}
