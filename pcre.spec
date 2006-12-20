@@ -212,7 +212,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README NEWS LICENCE
+%doc README NEWS LICENCE ChangeLog
 %attr(755,root,root) /%{_lib}/libpcre.so.*.*
 %attr(755,root,root) /%{_lib}/libpcreposix.so.*.*
 
