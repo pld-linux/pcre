@@ -3,8 +3,8 @@
 %bcond_without	static_libs # don't build static libraries
 #
 Summary:	Perl-Compatible Regular Expression library
-Summary(pl):	Biblioteka perlowych wyraøeÒ regularnych
-Summary(pt_BR):	Biblioteca de expressıes regulares vers„o
+Summary(pl.UTF-8):   Biblioteka perlowych wyra≈ºe≈Ñ regularnych
+Summary(pt_BR.UTF-8):   Biblioteca de express√µes regulares vers√£o
 Name:		pcre
 Version:	7.0
 Release:	1
@@ -25,28 +25,28 @@ PCRE stands for the Perl Compatible Regular Expression library. It
 contains routines to match text against regular expressions similar to
 Perl's. It also contains a POSIX compatibility library.
 
-%description -l es
-A biblioteca PCRE È um set de funÁıes que implementam expressıes
-regulares utilizando-se da mesma sintaxe e sem‚ntica do perl 5. Possui
-sua prÛpria API nativa, bem como um set de funÁıes wrapper para
-corresponder ao padr„o POSIX de expressıes regulares.
+%description -l es.UTF-8
+A biblioteca PCRE √© um set de fun√ß√µes que implementam express√µes
+regulares utilizando-se da mesma sintaxe e sem√¢ntica do perl 5. Possui
+sua pr√≥pria API nativa, bem como um set de fun√ß√µes wrapper para
+corresponder ao padr√£o POSIX de express√µes regulares.
 
-%description -l pl
-PCRE (Perl-Compatible Regular Expression) oznacza bibliotekÍ wyraøeÒ
-regularnych kompatybilnych z perlowymi. Zawiera funkcje dopasowuj±ce
-tekst do wyraøeÒ regularnych podobnych do tych znanych z Perla.
-Zawiera takøe bibliotekÍ kompatybiln± z POSIX.
+%description -l pl.UTF-8
+PCRE (Perl-Compatible Regular Expression) oznacza bibliotekƒô wyra≈ºe≈Ñ
+regularnych kompatybilnych z perlowymi. Zawiera funkcje dopasowujƒÖce
+tekst do wyra≈ºe≈Ñ regularnych podobnych do tych znanych z Perla.
+Zawiera tak≈ºe bibliotekƒô kompatybilnƒÖ z POSIX.
 
-%description -l pt_BR
-A biblioteca PCRE È um conjunto de funÁıes que implementam expressıes
-regulares utilizando-se da mesma sintaxe e sem‚ntica do perl 5. Possui
-sua prÛpria API nativa, bem como um conjuntos de funÁıes wrapper para
-corresponder ao padr„o POSIX de expressıes regulares.
+%description -l pt_BR.UTF-8
+A biblioteca PCRE √© um conjunto de fun√ß√µes que implementam express√µes
+regulares utilizando-se da mesma sintaxe e sem√¢ntica do perl 5. Possui
+sua pr√≥pria API nativa, bem como um conjuntos de fun√ß√µes wrapper para
+corresponder ao padr√£o POSIX de express√µes regulares.
 
 %package devel
 Summary:	Perl-Compatible Regular Expression header files and development documentation
-Summary(pl):	Pliki nag≥Ûwkowe i dokumentacja do bibliotek pcre
-Summary(pt_BR):	Arquivos para desenvolvimento com pcre
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe i dokumentacja do bibliotek pcre
+Summary(pt_BR.UTF-8):   Arquivos para desenvolvimento com pcre
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	libpcre0-devel
@@ -55,61 +55,61 @@ Obsoletes:	libpcre0-devel
 Perl-Compatible Regular Expression header files and development
 documentation.
 
-%description devel -l es
-A biblioteca PCRE È um set de funÁıes que implementam expressıes
-regulares utilizando-se da mesma sintaxe e sem‚ntica do perl 5. Possui
-sua prÛpria API nativa, bem como um set de funÁıes wrapper para
-corresponder ao padr„o POSIX de expressıes regulares.
+%description devel -l es.UTF-8
+A biblioteca PCRE √© um set de fun√ß√µes que implementam express√µes
+regulares utilizando-se da mesma sintaxe e sem√¢ntica do perl 5. Possui
+sua pr√≥pria API nativa, bem como um set de fun√ß√µes wrapper para
+corresponder ao padr√£o POSIX de express√µes regulares.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe i dokumentacja do bibliotek pcre.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe i dokumentacja do bibliotek pcre.
 
-%description devel -l pt_BR
-A biblioteca PCRE È um conjunto de funÁıes que implementam expressıes
-regulares utilizando-se da mesma sintaxe e sem‚ntica do perl 5. Possui
-sua prÛpria API nativa, bem como um conjunto de funÁıes wrapper para
-corresponder ao padr„o POSIX de expressıes regulares.
+%description devel -l pt_BR.UTF-8
+A biblioteca PCRE √© um conjunto de fun√ß√µes que implementam express√µes
+regulares utilizando-se da mesma sintaxe e sem√¢ntica do perl 5. Possui
+sua pr√≥pria API nativa, bem como um conjunto de fun√ß√µes wrapper para
+corresponder ao padr√£o POSIX de express√µes regulares.
 
 %package static
 Summary:	Perl-Compatible Regular Expression static libraries
-Summary(pl):	Biblioteki statyczne pcre
-Summary(pt_BR):	Arquivos para desenvolvimento est·tico com pcre
+Summary(pl.UTF-8):   Biblioteki statyczne pcre
+Summary(pt_BR.UTF-8):   Arquivos para desenvolvimento est√°tico com pcre
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Perl-Compatible Regular Expression library static libraries.
 
-%description static -l es
-A biblioteca PCRE È um set de funÁıes que implementam expressıes
-regulares utilizando-se da mesma sintaxe e sem‚ntica do perl 5. Possui
-sua prÛpria API nativa, bem como um set de funÁıes wrapper para
-corresponder ao padr„o POSIX de expressıes regulares.
+%description static -l es.UTF-8
+A biblioteca PCRE √© um set de fun√ß√µes que implementam express√µes
+regulares utilizando-se da mesma sintaxe e sem√¢ntica do perl 5. Possui
+sua pr√≥pria API nativa, bem como um set de fun√ß√µes wrapper para
+corresponder ao padr√£o POSIX de express√µes regulares.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne pcre.
 
-%description static -l pt_BR
-A biblioteca PCRE È um conjunto de funÁıes que implementam expressıes
-regulares utilizando-se da mesma sintaxe e sem‚ntica do perl 5. Possui
-sua prÛpria API nativa, bem como um conjunto de funÁıes wrapper para
-corresponder ao padr„o POSIX de expressıes regulares.
+%description static -l pt_BR.UTF-8
+A biblioteca PCRE √© um conjunto de fun√ß√µes que implementam express√µes
+regulares utilizando-se da mesma sintaxe e sem√¢ntica do perl 5. Possui
+sua pr√≥pria API nativa, bem como um conjunto de fun√ß√µes wrapper para
+corresponder ao padr√£o POSIX de express√µes regulares.
 
 %package cxx
 Summary:	C++ wrapper to PCRE library
-Summary(pl):	Interfejs C++ do biblioteki PCRE
+Summary(pl.UTF-8):   Interfejs C++ do biblioteki PCRE
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description cxx
 C++ wrapper to PCRE library.
 
-%description cxx -l pl
+%description cxx -l pl.UTF-8
 Interfejs C++ do biblioteki PCRE.
 
 %package cxx-devel
 Summary:	Header file for C++ wrapper to PCRE library
-Summary(pl):	Plik nag≥Ûwkowy interfejsu C++ do biblioteki PCRE
+Summary(pl.UTF-8):   Plik nag≈Ç√≥wkowy interfejsu C++ do biblioteki PCRE
 Group:		Development/Libraries
 Requires:	%{name}-cxx = %{version}-%{release}
 Requires:	%{name}-devel = %{version}-%{release}
@@ -118,24 +118,24 @@ Requires:	libstdc++-devel
 %description cxx-devel
 Header file for C++ wrapper to PCRE library.
 
-%description cxx-devel -l pl
-Plik nag≥Ûwkowy interfejsu C++ do biblioteki PCRE.
+%description cxx-devel -l pl.UTF-8
+Plik nag≈Ç√≥wkowy interfejsu C++ do biblioteki PCRE.
 
 %package cxx-static
 Summary:	Static version of pcrecpp library
-Summary(pl):	Statyczna wersja biblioteki pcrecpp
+Summary(pl.UTF-8):   Statyczna wersja biblioteki pcrecpp
 Group:		Development/Libraries
 Requires:	%{name}-cxx-devel = %{version}-%{release}
 
 %description cxx-static
 Static version of pcrecpp library.
 
-%description cxx-static -l pl
+%description cxx-static -l pl.UTF-8
 Statyczna wersja biblioteki pcrecpp.
 
 %package -n pcregrep
 Summary:	Grep using Perl Compatible Regular Expressions
-Summary(pl):	Grep uøywaj±cy perlowych wyraøeÒ regularnych
+Summary(pl.UTF-8):   Grep u≈ºywajƒÖcy perlowych wyra≈ºe≈Ñ regularnych
 Group:		Applications/Text
 Obsoletes:	pgrep
 
@@ -143,30 +143,30 @@ Obsoletes:	pgrep
 pgrep is a grep workalike which uses perl-style regular expressions
 instead of POSIX regular expressions.
 
-%description -n pcregrep -l pl
-pgrep jest programem dzia≥aj±cym podobnie do grepa, ale uøywaj±cych
-perlowych wyraøeÒ regularnych, a nie posiksowych.
+%description -n pcregrep -l pl.UTF-8
+pgrep jest programem dzia≈ÇajƒÖcym podobnie do grepa, ale u≈ºywajƒÖcych
+perlowych wyra≈ºe≈Ñ regularnych, a nie posiksowych.
 
 %package -n pcretest
 Summary:	A program for testing Perl-comaptible regular expressions
-Summary(pl):	Program do testowania kompatybilnych z perlem wyraøeÒ regualarnych
+Summary(pl.UTF-8):   Program do testowania kompatybilnych z perlem wyra≈ºe≈Ñ regualarnych
 Group:		Applications/Text
 
 %description -n pcretest
 pcretest is a program which you can use to test regular expression
 
-%description -n pcretest -l pl
-pcretest jest programem za pomoc± moøna sprawdziÊ poprawno∂Ê wyraøenia regularnego
+%description -n pcretest -l pl.UTF-8
+pcretest jest programem za pomocƒÖ mo≈ºna sprawdziƒá poprawno≈õƒá wyra≈ºenia regularnego
 
 %package doc-html
 Summary:	Documentation for PCRE in HTML format
-Summary(pl):	Dokumentacja dla PCRE w formacie HTML
+Summary(pl.UTF-8):   Dokumentacja dla PCRE w formacie HTML
 Group:		Applications/Text
 
 %description doc-html
 Documentation for PCRE in HTML format.
 
-%description doc-html -l pl
+%description doc-html -l pl.UTF-8
 Dokumentacja dla PCRE w formacie HTML.
 
 %prep
