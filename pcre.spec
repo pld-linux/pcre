@@ -3,8 +3,8 @@
 %bcond_without	static_libs # don't build static libraries
 #
 Summary:	Perl-Compatible Regular Expression library
-Summary(pl.UTF-8):   Biblioteka perlowych wyrażeń regularnych
-Summary(pt_BR.UTF-8):   Biblioteca de expressões regulares versão
+Summary(pl.UTF-8):	Biblioteka perlowych wyrażeń regularnych
+Summary(pt_BR.UTF-8):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	7.0
 Release:	1
@@ -45,8 +45,8 @@ corresponder ao padrão POSIX de expressões regulares.
 
 %package devel
 Summary:	Perl-Compatible Regular Expression header files and development documentation
-Summary(pl.UTF-8):   Pliki nagłówkowe i dokumentacja do bibliotek pcre
-Summary(pt_BR.UTF-8):   Arquivos para desenvolvimento com pcre
+Summary(pl.UTF-8):	Pliki nagłówkowe i dokumentacja do bibliotek pcre
+Summary(pt_BR.UTF-8):	Arquivos para desenvolvimento com pcre
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	libpcre0-devel
@@ -72,8 +72,8 @@ corresponder ao padrão POSIX de expressões regulares.
 
 %package static
 Summary:	Perl-Compatible Regular Expression static libraries
-Summary(pl.UTF-8):   Biblioteki statyczne pcre
-Summary(pt_BR.UTF-8):   Arquivos para desenvolvimento estático com pcre
+Summary(pl.UTF-8):	Biblioteki statyczne pcre
+Summary(pt_BR.UTF-8):	Arquivos para desenvolvimento estático com pcre
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -97,7 +97,7 @@ corresponder ao padrão POSIX de expressões regulares.
 
 %package cxx
 Summary:	C++ wrapper to PCRE library
-Summary(pl.UTF-8):   Interfejs C++ do biblioteki PCRE
+Summary(pl.UTF-8):	Interfejs C++ do biblioteki PCRE
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -109,7 +109,7 @@ Interfejs C++ do biblioteki PCRE.
 
 %package cxx-devel
 Summary:	Header file for C++ wrapper to PCRE library
-Summary(pl.UTF-8):   Plik nagłówkowy interfejsu C++ do biblioteki PCRE
+Summary(pl.UTF-8):	Plik nagłówkowy interfejsu C++ do biblioteki PCRE
 Group:		Development/Libraries
 Requires:	%{name}-cxx = %{version}-%{release}
 Requires:	%{name}-devel = %{version}-%{release}
@@ -123,7 +123,7 @@ Plik nagłówkowy interfejsu C++ do biblioteki PCRE.
 
 %package cxx-static
 Summary:	Static version of pcrecpp library
-Summary(pl.UTF-8):   Statyczna wersja biblioteki pcrecpp
+Summary(pl.UTF-8):	Statyczna wersja biblioteki pcrecpp
 Group:		Development/Libraries
 Requires:	%{name}-cxx-devel = %{version}-%{release}
 
@@ -135,7 +135,7 @@ Statyczna wersja biblioteki pcrecpp.
 
 %package -n pcregrep
 Summary:	Grep using Perl Compatible Regular Expressions
-Summary(pl.UTF-8):   Grep używający perlowych wyrażeń regularnych
+Summary(pl.UTF-8):	Grep używający perlowych wyrażeń regularnych
 Group:		Applications/Text
 Obsoletes:	pgrep
 
@@ -149,7 +149,7 @@ perlowych wyrażeń regularnych, a nie posiksowych.
 
 %package -n pcretest
 Summary:	A program for testing Perl-comaptible regular expressions
-Summary(pl.UTF-8):   Program do testowania kompatybilnych z perlem wyrażeń regualarnych
+Summary(pl.UTF-8):	Program do testowania kompatybilnych z perlem wyrażeń regualarnych
 Group:		Applications/Text
 
 %description -n pcretest
@@ -160,7 +160,7 @@ pcretest jest programem za pomocą można sprawdzić poprawność wyrażenia reg
 
 %package doc-html
 Summary:	Documentation for PCRE in HTML format
-Summary(pl.UTF-8):   Dokumentacja dla PCRE w formacie HTML
+Summary(pl.UTF-8):	Dokumentacja dla PCRE w formacie HTML
 Group:		Applications/Text
 
 %description doc-html
