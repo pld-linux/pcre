@@ -6,12 +6,12 @@ Summary:	Perl-Compatible Regular Expression library
 Summary(pl.UTF-8):	Biblioteka perlowych wyrażeń regularnych
 Summary(pt_BR.UTF-8):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	7.0
-Release:	2
+Version:	7.1
+Release:	1
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
-# Source0-md5:	b97e3bb84bd665e0fbb7a90344d65a43
+# Source0-md5:	c678550aaf064a17bb4bb6ea36dd6d88
 URL:		http://www.pcre.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
@@ -176,6 +176,8 @@ Dokumentacja dla PCRE w formacie HTML.
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	CXXLDFLAGS="%{rpmldflags}" \
 	%{!?with_static_libs:--enable-static=no} \
@@ -200,6 +202,8 @@ ln -sf /%{_lib}/`cd ../../%{_lib} ; echo libpcreposix.so.*.*.*` libpcreposix.so
 
 cd -
 install pcredemo.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+
+rm -rf $RPM_BUILD_ROOT%{_docdir}/pcre
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -226,6 +230,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/pcre.h
 %{_includedir}/pcreposix.h
 %{_pkgconfigdir}/libpcre.pc
+%{_mandir}/man1/pcre-config.1*
 %{_mandir}/man3/*
 %exclude %{_mandir}/man3/pcrecpp.3*
 %{_examplesdir}/%{name}-%{version}
