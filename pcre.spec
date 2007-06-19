@@ -1,6 +1,7 @@
 #
 # Conditional build:
-%bcond_without	static_libs # don't build static libraries
+%bcond_without	static_libs	# don't build static libraries
+%bcond_without	tests		# don't perform "make check"
 #
 Summary:	Perl-Compatible Regular Expression library
 Summary(pl.UTF-8):	Biblioteka perlowych wyrażeń regularnych
@@ -185,6 +186,10 @@ Dokumentacja dla PCRE w formacie HTML.
 	--enable-unicode-properties
 
 %{__make}
+
+%if %{with tests}
+%{__make} check
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
