@@ -202,10 +202,10 @@ mv -f $RPM_BUILD_ROOT%{_libdir}/libpcre.so.*.* $RPM_BUILD_ROOT/%{_lib}
 mv -f $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so.*.* $RPM_BUILD_ROOT/%{_lib}
 
 cd $RPM_BUILD_ROOT%{_libdir}
-ln -sf /%{_lib}/`cd ../../%{_lib} ; echo libpcre.so.*.*.*` libpcre.so
-ln -sf /%{_lib}/`cd ../../%{_lib} ; echo libpcreposix.so.*.*.*` libpcreposix.so
-
+ln -sf /%{_lib}/$(cd ../../%{_lib}; echo libpcre.so.*.*.*) libpcre.so
+ln -sf /%{_lib}/$(cd ../../%{_lib}; echo libpcreposix.so.*.*.*) libpcreposix.so
 cd -
+
 install pcredemo.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 rm -rf $RPM_BUILD_ROOT%{_docdir}/pcre
