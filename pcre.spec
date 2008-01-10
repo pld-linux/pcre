@@ -200,13 +200,11 @@ install -d $RPM_BUILD_ROOT{/%{_lib},%{_examplesdir}/%{name}-%{version}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv -f $RPM_BUILD_ROOT%{_libdir}/libpcre.so.*.* $RPM_BUILD_ROOT/%{_lib}
-mv -f $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so.*.* $RPM_BUILD_ROOT/%{_lib}
+mv -f $RPM_BUILD_ROOT%{_libdir}/libpcre.so.* $RPM_BUILD_ROOT/%{_lib}
+mv -f $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so.* $RPM_BUILD_ROOT/%{_lib}
 
-cd $RPM_BUILD_ROOT%{_libdir}
-ln -sf /%{_lib}/$(cd ../../%{_lib}; echo libpcre.so.*.*.*) libpcre.so
-ln -sf /%{_lib}/$(cd ../../%{_lib}; echo libpcreposix.so.*.*.*) libpcreposix.so
-cd -
+ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcre.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcre.so
+ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcreposix.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so
 
 install pcredemo.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
@@ -224,8 +222,10 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README NEWS LICENCE ChangeLog
-%attr(755,root,root) /%{_lib}/libpcre.so.*.*
-%attr(755,root,root) /%{_lib}/libpcreposix.so.*.*
+%attr(755,root,root) /%{_lib}/libpcre.so.*.*.*
+%attr(755,root,root) %ghost /%{_lib}/libpcre.so.0
+%attr(755,root,root) /%{_lib}/libpcreposix.so.*.*.*
+%attr(755,root,root) %ghost /%{_lib}/libpcreposix.so.0
 
 %files devel
 %defattr(644,root,root,755)
@@ -238,7 +238,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/pcreposix.h
 %{_pkgconfigdir}/libpcre.pc
 %{_mandir}/man1/pcre-config.1*
-%{_mandir}/man3/*
+%{_mandir}/man3/pcre*.3*
 %exclude %{_mandir}/man3/pcrecpp.3*
 %{_examplesdir}/%{name}-%{version}
 
@@ -252,6 +252,7 @@ rm -rf $RPM_BUILD_ROOT
 %files cxx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpcrecpp.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpcrecpp.so.0
 
 %files cxx-devel
 %defattr(644,root,root,755)
