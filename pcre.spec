@@ -7,18 +7,21 @@ Summary:	Perl-Compatible Regular Expression library
 Summary(pl.UTF-8):	Biblioteka perlowych wyrażeń regularnych
 Summary(pt_BR.UTF-8):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	7.6
-Release:	2
+Version:	7.7
+Release:	1
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
-# Source0-md5:	2af38e083fb90ef60fa9eda7cc290e86
+# Source0-md5:	4b2e9cde1f7227448dddba59843efa0b
 Patch0:		%{name}-pcreposix-glibc-conflict.patch
 URL:		http://www.pcre.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
+BuildRequires:	bzip2-devel	
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
+BuildRequires:	readline-devel	
+BuildRequires:	zlib-devel	
 Obsoletes:	libpcre0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -185,7 +188,10 @@ Dokumentacja dla PCRE w formacie HTML.
 	CXXLDFLAGS="%{rpmldflags}" \
 	%{!?with_static_libs:--enable-static=no} \
 	--enable-utf8 \
-	--enable-unicode-properties
+	--enable-unicode-properties \
+	--enable-pcregrep-libz \
+	--enable-pcregrep-libbz2 \
+	--enable-pcretest-libreadline
 
 %{__make}
 
