@@ -1,0 +1,2 @@
+- rel 2
+- Prefix all pcreposix conflicting functions with pcreposix_ (changes ABI of pcreposix library but makes it conflict free from glibc)
