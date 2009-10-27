@@ -14,7 +14,6 @@ Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
 # Source0-md5:	caf564aa69d68e965e9bf0ff2a094c65
 Patch0:		%{name}-pcreposix-glibc-conflict.patch
-Patch1:		%{name}-link.patch
 URL:		http://www.pcre.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
@@ -178,7 +177,6 @@ Dokumentacja dla PCRE w formacie HTML.
 %prep
 %setup -q
 %patch0 -p1
-#%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -188,7 +186,7 @@ Dokumentacja dla PCRE w formacie HTML.
 %{__automake}
 %configure \
 	CXXLDFLAGS="%{rpmldflags}" \
-	%{!?with_static_libs:--enable-static=no} \
+	%{!?with_static_libs:--disable-static} \
 	--enable-utf8 \
 	--enable-unicode-properties \
 	--enable-pcregrep-libz \
@@ -247,6 +245,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/pcre.h
 %{_includedir}/pcreposix.h
 %{_pkgconfigdir}/libpcre.pc
+%{_pkgconfigdir}/libpcreposix.pc
 %{_mandir}/man1/pcre-config.1*
 %{_mandir}/man3/pcre*.3*
 %exclude %{_mandir}/man3/pcrecpp.3*
