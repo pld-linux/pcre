@@ -2,26 +2,26 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static libraries
 %bcond_without	tests		# don't perform "make check"
-#
+
 Summary:	Perl-Compatible Regular Expression library
 Summary(pl.UTF-8):	Biblioteka perlowych wyrażeń regularnych
 Summary(pt_BR.UTF-8):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	8.02
-Release:	2
+Version:	8.10
+Release:	1
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
-# Source0-md5:	27948c1b5f5c1eabc23cba1ebe4c316f
+# Source0-md5:	780867a700e9d4e4b9cb47aa5453e4b2
 Patch0:		%{name}-pcreposix-glibc-conflict.patch
 URL:		http://www.pcre.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
-BuildRequires:	bzip2-devel	
+BuildRequires:	bzip2-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
-BuildRequires:	readline-devel	
-BuildRequires:	zlib-devel	
+BuildRequires:	readline-devel
+BuildRequires:	zlib-devel
 Obsoletes:	libpcre0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -161,7 +161,8 @@ Group:		Applications/Text
 pcretest is a program which you can use to test regular expression
 
 %description -n pcretest -l pl.UTF-8
-pcretest jest programem za pomocą można sprawdzić poprawność wyrażenia regularnego
+pcretest jest programem za pomocą można sprawdzić poprawność wyrażenia
+regularnego
 
 %package doc-html
 Summary:	Documentation for PCRE in HTML format
@@ -214,7 +215,7 @@ mv -f $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so.* $RPM_BUILD_ROOT/%{_lib}
 ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcre.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcre.so
 ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcreposix.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so
 
-install pcredemo.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -a pcredemo.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 rm -rf $RPM_BUILD_ROOT%{_docdir}/pcre
 
