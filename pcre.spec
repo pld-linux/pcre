@@ -154,15 +154,15 @@ perlowych wyrażeń regularnych, a nie posiksowych.
 
 %package -n pcretest
 Summary:	A program for testing Perl-comaptible regular expressions
-Summary(pl.UTF-8):	Program do testowania kompatybilnych z perlem wyrażeń regualarnych
+Summary(pl.UTF-8):	Program do testowania kompatybilnych z perlem wyrażeń regularnych
 Group:		Applications/Text
 
 %description -n pcretest
-pcretest is a program which you can use to test regular expression
+pcretest is a program which you can use to test regular expression.
 
 %description -n pcretest -l pl.UTF-8
-pcretest jest programem za pomocą można sprawdzić poprawność wyrażenia
-regularnego
+pcretest jest programem, za pomocą którego można sprawdzić poprawność
+wyrażenia regularnego.
 
 %package doc-html
 Summary:	Documentation for PCRE in HTML format
