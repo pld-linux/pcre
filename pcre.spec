@@ -1,5 +1,6 @@
 #
 # Conditional build:
+%bcond_with	pcre16		# enable 16 bit character support (one test fails)
 %bcond_without	static_libs	# don't build static libraries
 %bcond_without	tests		# don't perform "make check"
 
@@ -7,12 +8,12 @@ Summary:	Perl-Compatible Regular Expression library
 Summary(pl.UTF-8):	Biblioteka perlowych wyrażeń regularnych
 Summary(pt_BR.UTF-8):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	8.21
+Version:	8.30
 Release:	1
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
-# Source0-md5:	0a7b592bea64b7aa7f4011fc7171a730
+# Source0-md5:	98e8928cccc945d04279581e778fbdff
 Patch0:		%{name}-pcreposix-glibc-conflict.patch
 URL:		http://www.pcre.org/
 BuildRequires:	autoconf >= 2.57
@@ -191,6 +192,7 @@ Dokumentacja dla PCRE w formacie HTML.
 	--enable-jit \
 	--enable-utf8 \
 	--enable-unicode-properties \
+	%{?with_pcre16:--enable-pcre16} \
 	--enable-pcregrep-libz \
 	--enable-pcregrep-libbz2 \
 	--enable-pcretest-libreadline
@@ -212,8 +214,10 @@ install -d $RPM_BUILD_ROOT{/%{_lib},%{_examplesdir}/%{name}-%{version}}
 
 mv -f $RPM_BUILD_ROOT%{_libdir}/libpcre.so.* $RPM_BUILD_ROOT/%{_lib}
 mv -f $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so.* $RPM_BUILD_ROOT/%{_lib}
+%{?with_pcre16:mv -f $RPM_BUILD_ROOT%{_libdir}/libpcre16.so.* $RPM_BUILD_ROOT/%{_lib}}
 
 ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcre.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcre.so
+%{?with_pcre16:ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcre16.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcre16.so}
 ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcreposix.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so
 
 cp -a pcredemo.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -233,20 +237,27 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README NEWS LICENCE ChangeLog
 %attr(755,root,root) /%{_lib}/libpcre.so.*.*.*
-%attr(755,root,root) %ghost /%{_lib}/libpcre.so.0
+%attr(755,root,root) %ghost /%{_lib}/libpcre.so.1
 %attr(755,root,root) /%{_lib}/libpcreposix.so.*.*.*
 %attr(755,root,root) %ghost /%{_lib}/libpcreposix.so.0
+%if %{with pcre16}
+%attr(755,root,root) /%{_lib}/libpcre16.so.*.*.*
+%attr(755,root,root) %ghost /%{_lib}/libpcre16.so.0
+%endif
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pcre-config
 %attr(755,root,root) %{_libdir}/libpcre.so
+%{?with_pcre16:%attr(755,root,root) %{_libdir}/libpcre16.so}
 %attr(755,root,root) %{_libdir}/libpcreposix.so
 %{_libdir}/libpcre.la
+%{?with_pcre16:%{_libdir}/libpcre16.la}
 %{_libdir}/libpcreposix.la
 %{_includedir}/pcre.h
 %{_includedir}/pcreposix.h
 %{_pkgconfigdir}/libpcre.pc
+%{?with_pcre16:%{_pkgconfigdir}/libpcre16.pc}
 %{_pkgconfigdir}/libpcreposix.pc
 %{_mandir}/man1/pcre-config.1*
 %{_mandir}/man3/pcre*.3*
@@ -257,6 +268,7 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libpcre.a
+%{?with_pcre16:%{_libdir}/libpcre16.a}
 %{_libdir}/libpcreposix.a
 %endif
 
