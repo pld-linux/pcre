@@ -190,12 +190,12 @@ Dokumentacja dla PCRE w formacie HTML.
 	CXXLDFLAGS="%{rpmldflags}" \
 	%{!?with_static_libs:--disable-static} \
 	--enable-jit \
-	--enable-utf8 \
-	--enable-unicode-properties \
 	%{?with_pcre16:--enable-pcre16} \
 	--enable-pcregrep-libz \
 	--enable-pcregrep-libbz2 \
 	--enable-pcretest-libreadline
+	--enable-unicode-properties \
+	--enable-utf8
 
 %{__make}
 
