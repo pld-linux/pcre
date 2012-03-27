@@ -193,7 +193,7 @@ Dokumentacja dla PCRE w formacie HTML.
 	%{?with_pcre16:--enable-pcre16} \
 	--enable-pcregrep-libz \
 	--enable-pcregrep-libbz2 \
-	--enable-pcretest-libreadline
+	--enable-pcretest-libreadline \
 	--enable-unicode-properties \
 	--enable-utf8
 
