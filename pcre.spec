@@ -1,4 +1,6 @@
-#
+# TODO
+# - pcreposix subpackage?
+
 # Conditional build:
 %bcond_with	pcre16		# enable 16 bit character support (one test fails)
 %bcond_without	static_libs	# don't build static libraries
@@ -9,7 +11,7 @@ Summary(pl.UTF-8):	Biblioteka perlowych wyrażeń regularnych
 Summary(pt_BR.UTF-8):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	8.31
-Release:	1
+Release:	2
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
@@ -221,7 +223,7 @@ ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcre.so.*.*.*) $RPM_BUILD_
 %{?with_pcre16:ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcre16.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcre16.so}
 ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcreposix.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so
 
-cp -a pcredemo.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -p pcredemo.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 rm -rf $RPM_BUILD_ROOT%{_docdir}/pcre
 
