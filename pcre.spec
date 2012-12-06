@@ -2,7 +2,7 @@
 # - pcreposix subpackage?
 
 # Conditional build:
-%bcond_with	pcre16		# enable 16 bit character support (one test fails)
+%bcond_with	pcre16		# enable 16 bit character support
 %bcond_without	static_libs	# don't build static libraries
 %bcond_without	tests		# don't perform "make check"
 
