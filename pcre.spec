@@ -320,11 +320,11 @@ rm -rf $RPM_BUILD_ROOT
 %post   cxx -p /sbin/ldconfig
 %postun cxx -p /sbin/ldconfig
 
-%post	-p pcre16 -p /sbin/ldconfig
-%postun	-p pcre16 -p /sbin/ldconfig
+%post	-n pcre16 -p /sbin/ldconfig
+%postun	-n pcre16 -p /sbin/ldconfig
 
-%post	-p pcre32 -p /sbin/ldconfig
-%postun	-p pcre32 -p /sbin/ldconfig
+%post	-n pcre32 -p /sbin/ldconfig
+%postun	-n pcre32 -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
@@ -351,6 +351,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/pcreapi.3*
 %{_mandir}/man3/pcrebuild.3*
 %{_mandir}/man3/pcrecallout.3*
+%{_mandir}/man3/pcrecompat.3*
 %{_mandir}/man3/pcredemo.3*
 %{_mandir}/man3/pcrejit.3*
 %{_mandir}/man3/pcrelimits.3*
