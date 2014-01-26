@@ -2,8 +2,9 @@
 # - pcreposix subpackage?
 
 # Conditional build:
-%bcond_with	pcre16		# enable 16 bit character support
-%bcond_without	static_libs	# don't build static libraries
+%bcond_without	pcre16		# 16-bit character support
+%bcond_without	pcre32		# 32-bit character support
+%bcond_without	static_libs	# static libraries build
 %bcond_without	tests		# don't perform "make check"
 
 Summary:	Perl-Compatible Regular Expression library
@@ -11,7 +12,7 @@ Summary(pl.UTF-8):	Biblioteka perlowych wyrażeń regularnych
 Summary(pt_BR.UTF-8):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	8.34
-Release:	1
+Release:	2
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
@@ -141,10 +142,91 @@ Static version of pcrecpp library.
 %description cxx-static -l pl.UTF-8
 Statyczna wersja biblioteki pcrecpp.
 
+%package -n pcre16
+Summary:	PCRE library with 16-bit character support
+Summary(pl.UTF-8):	Biblioteka PCRE z obsługą znaków 16-bitowych
+Group:		Libraries
+
+%description -n pcre16
+PCRE (Perl compatible regular expressions) C library with 16-bit
+character support.
+
+%description -n pcre16 -l pl.UTF-8
+Biblioteka C PCRE (perlowych wyrażeń regularnych) z obsługą znaków
+16-bitowych.
+
+%package -n pcre16-devel
+Summary:	Development files for PCRE library with 16-bit character support
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki PCRE z obsługą znaków 16-bitowych
+Group:		Development/Libraries
+# base devel required for (common) headers and man page contents;
+# pulling base pcre doesn't hurt, as it's already required by some basic packages
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	pcre16 = %{version}-%{release}
+
+%description -n pcre16-devel
+Development files for PCRE library with 16-bit character support.
+
+%description -n pcre16-devel -l pl.UTF-8
+Pliki programistyczne biblioteki PCRE z obsługą znaków 16-bitowych.
+
+%package -n pcre16-static
+Summary:	Static PCRE library with 16-bit character support
+Summary(pl.UTF-8):	Biblioteka statyczna PCRE z obsługą znaków 16-bitowych
+Group:		Development/Libraries
+Requires:	pcre16-devel = %{version}-%{release}
+
+%description -n pcre16-static
+Static PCRE library with 16-bit character support.
+
+%description -n pcre16-static -l pl.UTF-8
+Biblioteka statyczna PCRE z obsługą znaków 16-bitowych.
+
+%package -n pcre32
+Summary:	PCRE library with 32-bit character support
+Summary(pl.UTF-8):	Biblioteka PCRE z obsługą znaków 32-bitowych
+Group:		Libraries
+
+%description -n pcre32
+PCRE (Perl compatible regular expressions) C library with 32-bit
+character support.
+
+%description -n pcre32 -l pl.UTF-8
+Biblioteka C PCRE (perlowych wyrażeń regularnych) z obsługą znaków
+32-bitowych.
+
+%package -n pcre32-devel
+Summary:	Development files for PCRE library with 32-bit character support
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki PCRE z obsługą znaków 32-bitowych
+Group:		Development/Libraries
+# base devel required for (common) headers and man page contents;
+# pulling base pcre doesn't hurt, as it's already required by some basic packages
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	pcre32 = %{version}-%{release}
+
+%description -n pcre32-devel
+Development files for PCRE library with 32-bit character support.
+
+%description -n pcre32-devel -l pl.UTF-8
+Pliki programistyczne biblioteki PCRE z obsługą znaków 32-bitowych.
+
+%package -n pcre32-static
+Summary:	Static PCRE library with 32-bit character support
+Summary(pl.UTF-8):	Biblioteka statyczna PCRE z obsługą znaków 32-bitowych
+Group:		Development/Libraries
+Requires:	pcre32-devel = %{version}-%{release}
+
+%description -n pcre32-static
+Static PCRE library with 32-bit character support.
+
+%description -n pcre32-static -l pl.UTF-8
+Biblioteka statyczna PCRE z obsługą znaków 32-bitowych.
+
 %package -n pcregrep
 Summary:	Grep using Perl Compatible Regular Expressions
 Summary(pl.UTF-8):	Grep używający perlowych wyrażeń regularnych
 Group:		Applications/Text
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	pgrep
 
 %description -n pcregrep
@@ -156,9 +238,12 @@ pgrep jest programem działającym podobnie do grepa, ale używających
 perlowych wyrażeń regularnych, a nie posiksowych.
 
 %package -n pcretest
-Summary:	A program for testing Perl-comaptible regular expressions
+Summary:	A program for testing Perl-compatible regular expressions
 Summary(pl.UTF-8):	Program do testowania kompatybilnych z perlem wyrażeń regularnych
 Group:		Applications/Text
+Requires:	%{name} = %{version}-%{release}
+%{?with_pcre16:Requires:	pcre16 = %{version}-%{release}}
+%{?with_pcre32:Requires:	pcre32 = %{version}-%{release}}
 
 %description -n pcretest
 pcretest is a program which you can use to test regular expression.
@@ -194,6 +279,7 @@ Dokumentacja dla PCRE w formacie HTML.
 	%{!?with_static_libs:--disable-static} \
 	--enable-jit \
 	%{?with_pcre16:--enable-pcre16} \
+	%{?with_pcre32:--enable-pcre32} \
 	--enable-pcregrep-libz \
 	--enable-pcregrep-libbz2 \
 	--enable-pcretest-libreadline \
@@ -217,10 +303,8 @@ install -d $RPM_BUILD_ROOT{/%{_lib},%{_examplesdir}/%{name}-%{version}}
 
 mv -f $RPM_BUILD_ROOT%{_libdir}/libpcre.so.* $RPM_BUILD_ROOT/%{_lib}
 mv -f $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so.* $RPM_BUILD_ROOT/%{_lib}
-%{?with_pcre16:mv -f $RPM_BUILD_ROOT%{_libdir}/libpcre16.so.* $RPM_BUILD_ROOT/%{_lib}}
 
 ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcre.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcre.so
-%{?with_pcre16:ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcre16.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcre16.so}
 ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libpcreposix.so.*.*.*) $RPM_BUILD_ROOT%{_libdir}/libpcreposix.so
 
 cp -p pcredemo.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -236,42 +320,56 @@ rm -rf $RPM_BUILD_ROOT
 %post   cxx -p /sbin/ldconfig
 %postun cxx -p /sbin/ldconfig
 
+%post	-p pcre16 -p /sbin/ldconfig
+%postun	-p pcre16 -p /sbin/ldconfig
+
+%post	-p pcre32 -p /sbin/ldconfig
+%postun	-p pcre32 -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
-%doc README NEWS LICENCE ChangeLog
+%doc AUTHORS ChangeLog LICENCE NEWS README
 %attr(755,root,root) /%{_lib}/libpcre.so.*.*.*
 %attr(755,root,root) %ghost /%{_lib}/libpcre.so.1
 %attr(755,root,root) /%{_lib}/libpcreposix.so.*.*.*
 %attr(755,root,root) %ghost /%{_lib}/libpcreposix.so.0
-%if %{with pcre16}
-%attr(755,root,root) /%{_lib}/libpcre16.so.*.*.*
-%attr(755,root,root) %ghost /%{_lib}/libpcre16.so.0
-%endif
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pcre-config
 %attr(755,root,root) %{_libdir}/libpcre.so
-%{?with_pcre16:%attr(755,root,root) %{_libdir}/libpcre16.so}
 %attr(755,root,root) %{_libdir}/libpcreposix.so
 %{_libdir}/libpcre.la
-%{?with_pcre16:%{_libdir}/libpcre16.la}
 %{_libdir}/libpcreposix.la
 %{_includedir}/pcre.h
 %{_includedir}/pcreposix.h
 %{_pkgconfigdir}/libpcre.pc
-%{?with_pcre16:%{_pkgconfigdir}/libpcre16.pc}
 %{_pkgconfigdir}/libpcreposix.pc
 %{_mandir}/man1/pcre-config.1*
-%{_mandir}/man3/pcre*.3*
-%exclude %{_mandir}/man3/pcrecpp.3*
+%{_mandir}/man3/pcre.3*
+%{_mandir}/man3/pcre_*.3*
+%{_mandir}/man3/pcreapi.3*
+%{_mandir}/man3/pcrebuild.3*
+%{_mandir}/man3/pcrecallout.3*
+%{_mandir}/man3/pcredemo.3*
+%{_mandir}/man3/pcrejit.3*
+%{_mandir}/man3/pcrelimits.3*
+%{_mandir}/man3/pcrematching.3*
+%{_mandir}/man3/pcrepartial.3*
+%{_mandir}/man3/pcrepattern.3*
+%{_mandir}/man3/pcreperform.3*
+%{_mandir}/man3/pcreposix.3*
+%{_mandir}/man3/pcreprecompile.3*
+%{_mandir}/man3/pcresample.3*
+%{_mandir}/man3/pcrestack.3*
+%{_mandir}/man3/pcresyntax.3*
+%{_mandir}/man3/pcreunicode.3*
 %{_examplesdir}/%{name}-%{version}
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libpcre.a
-%{?with_pcre16:%{_libdir}/libpcre16.a}
 %{_libdir}/libpcreposix.a
 %endif
 
@@ -295,6 +393,48 @@ rm -rf $RPM_BUILD_ROOT
 %files cxx-static
 %defattr(644,root,root,755)
 %{_libdir}/libpcrecpp.a
+%endif
+
+%if %{with pcre16}
+%files -n pcre16
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpcre16.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpcre16.so.0
+
+%files -n pcre16-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpcre16.so
+%{_libdir}/libpcre16.la
+%{_pkgconfigdir}/libpcre16.pc
+%{_mandir}/man3/pcre16.3*
+%{_mandir}/man3/pcre16_*.3*
+
+%if %{with static_libs}
+%files -n pcre16-static
+%defattr(644,root,root,755)
+%{_libdir}/libpcre16.a
+%endif
+%endif
+
+%if %{with pcre32}
+%files -n pcre32
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpcre32.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpcre32.so.0
+
+%files -n pcre32-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpcre32.so
+%{_libdir}/libpcre32.la
+%{_pkgconfigdir}/libpcre32.pc
+%{_mandir}/man3/pcre32.3*
+%{_mandir}/man3/pcre32_*.3*
+
+%if %{with static_libs}
+%files -n pcre32-static
+%defattr(644,root,root,755)
+%{_libdir}/libpcre32.a
+%endif
 %endif
 
 %files -n pcregrep
