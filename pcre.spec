@@ -277,7 +277,9 @@ Dokumentacja dla PCRE w formacie HTML.
 	CXXLDFLAGS="%{rpmldflags}" \
 	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static} \
+%ifnarch x32
 	--enable-jit \
+%endif
 	%{?with_pcre16:--enable-pcre16} \
 	%{?with_pcre32:--enable-pcre32} \
 	--enable-pcregrep-libz \
