@@ -1,0 +1,36 @@
+From 6d8fa98d5167bdd915ce1e32bcb6aaed078e5938 Mon Sep 17 00:00:00 2001
+From: ph10 <ph10@2f5784b3-3f2a-0410-8824-cb99058d5e15>
+Date: Tue, 26 Jun 2018 17:04:02 +0000
+Subject: [PATCH] Fix typos in pcrgrep.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+git-svn-id: svn://vcs.exim.org/pcre/code/trunk@1736 2f5784b3-3f2a-0410-8824-cb99058d5e15
+Petr Písař: Ported to 8.42.
+
+diff --git a/pcregrep.c b/pcregrep.c
+index a406be9..5982406 100644
+--- a/pcregrep.c
++++ b/pcregrep.c
+@@ -2252,7 +2252,7 @@ if (isdirectory(pathname))
+       int fnlength = strlen(pathname) + strlen(nextfile) + 2;
+       if (fnlength > 2048)
+         {
+-        fprintf(stderr, "pcre2grep: recursive filename is too long\n");
++        fprintf(stderr, "pcregrep: recursive filename is too long\n");
+         rc = 2;
+         break;
+         }
+@@ -3034,7 +3034,7 @@ LC_ALL environment variable is set, and if so, use it. */
+ if (locale == NULL)
+   {
+   locale = getenv("LC_ALL");
+-  locale_from = "LCC_ALL";
++  locale_from = "LC_ALL";
+   }
+ 
+ if (locale == NULL)
+-- 
+2.14.4
+

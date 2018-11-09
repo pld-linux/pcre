@@ -1,0 +1,178 @@
+From 2ede5a4b4a98add3bbf982f5805e015e8c61c565 Mon Sep 17 00:00:00 2001
+From: ph10 <ph10@2f5784b3-3f2a-0410-8824-cb99058d5e15>
+Date: Tue, 26 Jun 2018 16:51:43 +0000
+Subject: [PATCH] Fix two C++ wrapper bugs, unnoticed for years.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+git-svn-id: svn://vcs.exim.org/pcre/code/trunk@1735 2f5784b3-3f2a-0410-8824-cb99058d5e15
+
+Petr Písař: Ported to 8.42.
+
+diff --git a/pcrecpp.cc b/pcrecpp.cc
+index d09c9ab..77a2fed 100644
+--- a/pcrecpp.cc
++++ b/pcrecpp.cc
+@@ -80,6 +80,24 @@ static const string empty_string;
+ // If the user doesn't ask for any options, we just use this one
+ static RE_Options default_options;
+ 
++// Specials for the start of patterns. See comments where start_options is used
++// below. (PH June 2018)
++static const char *start_options[] = {
++  "(*UTF8)",
++  "(*UTF)",
++  "(*UCP)",
++  "(*NO_START_OPT)",
++  "(*NO_AUTO_POSSESS)",
++  "(*LIMIT_RECURSION=",
++  "(*LIMIT_MATCH=",
++  "(*CRLF)",
++  "(*CR)",
++  "(*BSR_UNICODE)",
++  "(*BSR_ANYCRLF)",
++  "(*ANYCRLF)",
++  "(*ANY)",
++  "" };
++
+ void RE::Init(const string& pat, const RE_Options* options) {
+   pattern_ = pat;
+   if (options == NULL) {
+@@ -135,7 +153,49 @@ pcre* RE::Compile(Anchor anchor) {
+   } else {
+     // Tack a '\z' at the end of RE.  Parenthesize it first so that
+     // the '\z' applies to all top-level alternatives in the regexp.
+-    string wrapped = "(?:";  // A non-counting grouping operator
++
++    /* When this code was written (for PCRE 6.0) it was enough just to
++    parenthesize the entire pattern. Unfortunately, when the feature of
++    starting patterns with (*UTF8) or (*CR) etc. was added to PCRE patterns,
++    this code was never updated. This bug was not noticed till 2018, long after
++    PCRE became obsolescent and its maintainer no longer around. Since PCRE is
++    frozen, I have added a hack to check for all the existing "start of
++    pattern" specials - knowing that no new ones will ever be added. I am not a
++    C++ programmer, so the code style is no doubt crude. It is also
++    inefficient, but is only run when the pattern starts with "(*".
++    PH June 2018. */
++
++    string wrapped = "";
++
++    if (pattern_.c_str()[0] == '(' && pattern_.c_str()[1] == '*') {
++      int kk, klen, kmat;
++      for (;;) {   // Loop for any number of leading items
++
++        for (kk = 0; start_options[kk][0] != 0; kk++) {
++          klen = strlen(start_options[kk]);
++          kmat = strncmp(pattern_.c_str(), start_options[kk], klen);
++          if (kmat >= 0) break;
++        }
++        if (kmat != 0) break;  // Not found
++
++        // If the item ended in "=" we must copy digits up to ")".
++
++        if (start_options[kk][klen-1] == '=') {
++          while (isdigit(pattern_.c_str()[klen])) klen++;
++          if (pattern_.c_str()[klen] != ')') break;  // Syntax error
++          klen++;
++        }
++
++        // Move the item from the pattern to the start of the wrapped string.
++
++        wrapped += pattern_.substr(0, klen);
++        pattern_.erase(0, klen);
++      }
++    }
++
++    // Wrap the rest of the pattern.
++
++    wrapped += "(?:";  // A non-counting grouping operator
+     wrapped += pattern_;
+     wrapped += ")\\z";
+     re = pcre_compile(wrapped.c_str(), pcre_options,
+@@ -415,7 +475,7 @@ int RE::GlobalReplace(const StringPiece& rewrite,
+           matchend++;
+         }
+         // We also need to advance more than one char if we're in utf8 mode.
+-#ifdef SUPPORT_UTF8
++#ifdef SUPPORT_UTF
+         if (options_.utf8()) {
+           while (matchend < static_cast<int>(str->length()) &&
+                  ((*str)[matchend] & 0xc0) == 0x80)
+diff --git a/pcrecpp_unittest.cc b/pcrecpp_unittest.cc
+index 4b15fbe..255066f 100644
+--- a/pcrecpp_unittest.cc
++++ b/pcrecpp_unittest.cc
+@@ -309,7 +309,7 @@ static void TestReplace() {
+       "@aa",
+       "@@@",
+       3 },
+-#ifdef SUPPORT_UTF8
++#ifdef SUPPORT_UTF
+     { "b*",
+       "bb",
+       "\xE3\x83\x9B\xE3\x83\xBC\xE3\x83\xA0\xE3\x81\xB8",   // utf8
+@@ -327,7 +327,7 @@ static void TestReplace() {
+     { "", NULL, NULL, NULL, NULL, 0 }
+   };
+ 
+-#ifdef SUPPORT_UTF8
++#ifdef SUPPORT_UTF
+   const bool support_utf8 = true;
+ #else
+   const bool support_utf8 = false;
+@@ -535,7 +535,7 @@ static void TestQuoteMetaLatin1() {
+ }
+ 
+ static void TestQuoteMetaUtf8() {
+-#ifdef SUPPORT_UTF8
++#ifdef SUPPORT_UTF
+   TestQuoteMeta("Pl\xc3\xa1\x63ido Domingo", pcrecpp::UTF8());
+   TestQuoteMeta("xyz", pcrecpp::UTF8());            // No fancy utf8
+   TestQuoteMeta("\xc2\xb0", pcrecpp::UTF8());       // 2-byte utf8 (degree symbol)
+@@ -1178,7 +1178,7 @@ int main(int argc, char** argv) {
+     CHECK(re.error().empty());  // Must have no error
+   }
+ 
+-#ifdef SUPPORT_UTF8
++#ifdef SUPPORT_UTF
+   // Check UTF-8 handling
+   {
+     printf("Testing UTF-8 handling\n");
+@@ -1202,6 +1202,24 @@ int main(int argc, char** argv) {
+     CHECK(re_test1.FullMatch(utf8_string));
+     RE re_test2("...", pcrecpp::UTF8());
+     CHECK(re_test2.FullMatch(utf8_string));
++    
++    // PH added these tests for leading option settings
++    
++    RE re_testZ1("(*UTF8)...");
++    CHECK(re_testZ1.FullMatch(utf8_string));
++
++    RE re_testZ2("(*UTF)...");
++    CHECK(re_testZ2.FullMatch(utf8_string));
++
++    RE re_testZ3("(*UCP)(*UTF)...");
++    CHECK(re_testZ3.FullMatch(utf8_string));
++
++    RE re_testZ4("(*UCP)(*LIMIT_MATCH=1000)(*UTF)...");
++    CHECK(re_testZ4.FullMatch(utf8_string));
++ 
++    RE re_testZ5("(*UCP)(*LIMIT_MATCH=1000)(*ANY)(*UTF)...");
++    CHECK(re_testZ5.FullMatch(utf8_string));
++ 
+ 
+     // Check that '.' matches one byte or UTF-8 character
+     // according to the mode.
+@@ -1248,7 +1266,7 @@ int main(int argc, char** argv) {
+     CHECK(!match_sentence.FullMatch(target));
+     CHECK(!match_sentence_re.FullMatch(target));
+   }
+-#endif  /* def SUPPORT_UTF8 */
++#endif  /* def SUPPORT_UTF */
+ 
+   printf("Testing error reporting\n");
+ 
+-- 
+2.14.4
+

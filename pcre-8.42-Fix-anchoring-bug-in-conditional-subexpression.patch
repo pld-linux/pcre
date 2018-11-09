@@ -1,0 +1,70 @@
+From 7abc4de8303e8908eeb96714dac53ae10ff465e3 Mon Sep 17 00:00:00 2001
+From: ph10 <ph10@2f5784b3-3f2a-0410-8824-cb99058d5e15>
+Date: Sun, 2 Sep 2018 17:05:38 +0000
+Subject: [PATCH] Fix anchoring bug in conditional subexpression.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+git-svn-id: svn://vcs.exim.org/pcre/code/trunk@1739 2f5784b3-3f2a-0410-8824-cb99058d5e15
+Petr Písař: Ported to 8.42
+---
+ pcre_compile.c       | 12 ++++++++++--
+ testdata/testinput2  |  3 +++
+ testdata/testoutput2 |  4 ++++
+
+ Version 8.42 20-March-2018
+ --------------------------
+diff --git a/pcre_compile.c b/pcre_compile.c
+index 3991d6c..6141fb3 100644
+--- a/pcre_compile.c
++++ b/pcre_compile.c
+@@ -8682,10 +8682,18 @@ do {
+      if (!is_anchored(scode, new_map, cd, atomcount)) return FALSE;
+      }
+ 
+-   /* Positive forward assertions and conditions */
++   /* Positive forward assertion */
+ 
+-   else if (op == OP_ASSERT || op == OP_COND)
++   else if (op == OP_ASSERT)
++     {
++     if (!is_anchored(scode, bracket_map, cd, atomcount)) return FALSE;
++     }
++
++   /* Condition; not anchored if no second branch */
++
++   else if (op == OP_COND)
+      {
++     if (scode[GET(scode,1)] != OP_ALT) return FALSE;
+      if (!is_anchored(scode, bracket_map, cd, atomcount)) return FALSE;
+      }
+ 
+diff --git a/testdata/testinput2 b/testdata/testinput2
+index 8ba4dc4..3528de1 100644
+--- a/testdata/testinput2
++++ b/testdata/testinput2
+@@ -4257,4 +4257,7 @@ backtracking verbs. --/
+     ab
+     aaab 
+ 
++/(?(?=^))b/
++    abc
++
+ /-- End of testinput2 --/
+diff --git a/testdata/testoutput2 b/testdata/testoutput2
+index 61ed8d9..4ccda27 100644
+--- a/testdata/testoutput2
++++ b/testdata/testoutput2
+@@ -14721,4 +14721,8 @@ No need char
+  0: ab
+  1: a
+ 
++/(?(?=^))b/
++    abc
++ 0: b
++
+ /-- End of testinput2 --/
+-- 
+2.14.4
+

@@ -1,0 +1,89 @@
+From a65e1b693110caa27fe8f724583fc28ce5924026 Mon Sep 17 00:00:00 2001
+From: ph10 <ph10@2f5784b3-3f2a-0410-8824-cb99058d5e15>
+Date: Sat, 20 Oct 2018 09:38:44 +0000
+Subject: [PATCH] Fix zero-repeat leading subroutine call first character
+ error.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+git-svn-id: svn://vcs.exim.org/pcre/code/trunk@1741 2f5784b3-3f2a-0410-8824-cb99058d5e15
+Petr Písař: Ported to 8.42.
+---
+ pcre_compile.c       |  2 ++
+ testdata/testinput1  | 15 +++++++++++++++
+ testdata/testoutput1 | 24 ++++++++++++++++++++++++
+
+diff --git a/pcre_compile.c b/pcre_compile.c
+index 6141fb3..079d30a 100644
+--- a/pcre_compile.c
++++ b/pcre_compile.c
+@@ -7642,6 +7642,8 @@ for (;; ptr++)
+         /* Can't determine a first byte now */
+ 
+         if (firstcharflags == REQ_UNSET) firstcharflags = REQ_NONE;
++        zerofirstchar = firstchar;
++        zerofirstcharflags = firstcharflags;
+         continue;
+ 
+ 
+diff --git a/testdata/testinput1 b/testdata/testinput1
+index 5c23f41..02e4f48 100644
+--- a/testdata/testinput1
++++ b/testdata/testinput1
+@@ -5742,4 +5742,19 @@ AbcdCBefgBhiBqz
+ /X+(?#comment)?/
+     >XXX<
+ 
++/   (?<word> \w+ )*    \.   /xi
++    pokus.
++    
++/(?(DEFINE) (?<word> \w+ ) ) (?&word)*   \./xi
++    pokus.
++
++/(?(DEFINE) (?<word> \w+ ) ) ( (?&word)* )   \./xi 
++    pokus.
++
++/(?&word)*  (?(DEFINE) (?<word> \w+ ) )  \./xi
++    pokus.
++
++/(?&word)*  \. (?<word> \w+ )/xi
++    pokus.hokus
++
+ /-- End of testinput1 --/
+diff --git a/testdata/testoutput1 b/testdata/testoutput1
+index eff8ecc..e6147e6 100644
+--- a/testdata/testoutput1
++++ b/testdata/testoutput1
+@@ -9446,4 +9446,28 @@ No match
+     >XXX<
+  0: X
+ 
++/   (?<word> \w+ )*    \.   /xi
++    pokus.
++ 0: pokus.
++ 1: pokus
++    
++/(?(DEFINE) (?<word> \w+ ) ) (?&word)*   \./xi
++    pokus.
++ 0: pokus.
++
++/(?(DEFINE) (?<word> \w+ ) ) ( (?&word)* )   \./xi 
++    pokus.
++ 0: pokus.
++ 1: <unset>
++ 2: pokus
++
++/(?&word)*  (?(DEFINE) (?<word> \w+ ) )  \./xi
++    pokus.
++ 0: pokus.
++
++/(?&word)*  \. (?<word> \w+ )/xi
++    pokus.hokus
++ 0: pokus.hokus
++ 1: hokus
++
+ /-- End of testinput1 --/
+-- 
+2.17.2
+
