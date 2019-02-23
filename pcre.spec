@@ -11,20 +11,14 @@ Summary:	Perl-Compatible Regular Expression library
 Summary(pl.UTF-8):	Biblioteka perlowych wyrażeń regularnych
 Summary(pt_BR.UTF-8):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	8.42
-Release:	2
+Version:	8.43
+Release:	1
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
-# Source0-md5:	085b6aa253e0f91cae70b3cdbe8c1ac2
+# Source0-md5:	636222e79e392c3d95dcc545f24f98c4
 Patch0:		%{name}-pcreposix-glibc-conflict.patch
 Patch1:		pcre-8.41-fix_stack_estimator.patch
-Patch2:		pcre-8.42-Fix-anchoring-bug-in-conditional-subexpression.patch
-Patch3:		pcre-8.42-Fix-bad-auto-possessify-for-certain-classes.patch
-Patch4:		pcre-8.42-Fix-subject-buffer-overread-in-JIT.patch
-Patch5:		pcre-8.42-Fix-two-C-wrapper-bugs-unnoticed-for-years.patch
-Patch6:		pcre-8.42-Fix-typos-in-pcrgrep.patch
-Patch7:		pcre-8.42-Fix-zero-repeat-leading-subroutine-call-first-charac.patch
 URL:		http://www.pcre.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
@@ -274,12 +268,6 @@ Dokumentacja dla PCRE w formacie HTML.
 %setup -q
 %patch0 -p1
 %patch1 -p2
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 %build
 %{__libtoolize}
