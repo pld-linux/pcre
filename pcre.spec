@@ -15,7 +15,7 @@ Version:	8.43
 Release:	1
 License:	BSD (see LICENCE)
 Group:		Libraries
-Source0:	ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/%{name}-%{version}.tar.bz2
+Source0:	https://ftp.pcre.org/pub/pcre/%{name}-%{version}.tar.bz2
 # Source0-md5:	636222e79e392c3d95dcc545f24f98c4
 Patch0:		%{name}-pcreposix-glibc-conflict.patch
 Patch1:		pcre-8.41-fix_stack_estimator.patch
