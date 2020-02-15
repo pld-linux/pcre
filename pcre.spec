@@ -11,12 +11,12 @@ Summary:	Perl-Compatible Regular Expression library
 Summary(pl.UTF-8):	Biblioteka perlowych wyrażeń regularnych
 Summary(pt_BR.UTF-8):	Biblioteca de expressões regulares versão
 Name:		pcre
-Version:	8.43
-Release:	2
+Version:	8.44
+Release:	1
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	https://ftp.pcre.org/pub/pcre/%{name}-%{version}.tar.bz2
-# Source0-md5:	636222e79e392c3d95dcc545f24f98c4
+# Source0-md5:	cf7326204cc46c755b5b2608033d9d24
 Patch0:		%{name}-pcreposix-glibc-conflict.patch
 Patch1:		pcre-8.41-fix_stack_estimator.patch
 URL:		http://www.pcre.org/
