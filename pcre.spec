@@ -266,8 +266,8 @@ Dokumentacja dla PCRE w formacie HTML.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p2
+%patch -P0 -p1
+%patch -P1 -p2
 
 %build
 %{__libtoolize}
