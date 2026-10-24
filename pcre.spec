@@ -12,7 +12,7 @@ Summary(pl.UTF-8):	Biblioteka perlowych wyrażeń regularnych
 Summary(pt_BR.UTF-8):	Biblioteca de expressões regulares versão
 Name:		pcre
 Version:	8.45
-Release:	1
+Release:	2
 License:	BSD (see LICENCE)
 Group:		Libraries
 Source0:	https://ftp.pcre.org/pub/pcre/%{name}-%{version}.tar.bz2
@@ -58,7 +58,7 @@ Summary:	Perl-Compatible Regular Expression header files and development documen
 Summary(pl.UTF-8):	Pliki nagłówkowe i dokumentacja do bibliotek pcre
 Summary(pt_BR.UTF-8):	Arquivos para desenvolvimento com pcre
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 Obsoletes:	libpcre0-devel
 
 %description devel
@@ -85,7 +85,7 @@ Summary:	Perl-Compatible Regular Expression static libraries
 Summary(pl.UTF-8):	Biblioteki statyczne pcre
 Summary(pt_BR.UTF-8):	Arquivos para desenvolvimento estático com pcre
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
 
 %description static
 Perl-Compatible Regular Expression library static libraries.
@@ -109,7 +109,7 @@ corresponder ao padrão POSIX de expressões regulares.
 Summary:	C++ wrapper to PCRE library
 Summary(pl.UTF-8):	Interfejs C++ do biblioteki PCRE
 Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 
 %description cxx
 C++ wrapper to PCRE library.
@@ -121,8 +121,8 @@ Interfejs C++ do biblioteki PCRE.
 Summary:	Header file for C++ wrapper to PCRE library
 Summary(pl.UTF-8):	Plik nagłówkowy interfejsu C++ do biblioteki PCRE
 Group:		Development/Libraries
-Requires:	%{name}-cxx = %{version}-%{release}
-Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-cxx%{?_isa} = %{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
 Requires:	libstdc++-devel
 
 %description cxx-devel
@@ -135,7 +135,7 @@ Plik nagłówkowy interfejsu C++ do biblioteki PCRE.
 Summary:	Static version of pcrecpp library
 Summary(pl.UTF-8):	Statyczna wersja biblioteki pcrecpp
 Group:		Development/Libraries
-Requires:	%{name}-cxx-devel = %{version}-%{release}
+Requires:	%{name}-cxx-devel%{?_isa} = %{version}-%{release}
 
 %description cxx-static
 Static version of pcrecpp library.
@@ -162,8 +162,8 @@ Summary(pl.UTF-8):	Pliki programistyczne biblioteki PCRE z obsługą znaków 16-
 Group:		Development/Libraries
 # base devel required for (common) headers and man page contents;
 # pulling base pcre doesn't hurt, as it's already required by some basic packages
-Requires:	%{name}-devel = %{version}-%{release}
-Requires:	pcre16 = %{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
+Requires:	pcre16%{?_isa} = %{version}-%{release}
 
 %description -n pcre16-devel
 Development files for PCRE library with 16-bit character support.
@@ -175,7 +175,7 @@ Pliki programistyczne biblioteki PCRE z obsługą znaków 16-bitowych.
 Summary:	Static PCRE library with 16-bit character support
 Summary(pl.UTF-8):	Biblioteka statyczna PCRE z obsługą znaków 16-bitowych
 Group:		Development/Libraries
-Requires:	pcre16-devel = %{version}-%{release}
+Requires:	pcre16-devel%{?_isa} = %{version}-%{release}
 
 %description -n pcre16-static
 Static PCRE library with 16-bit character support.
@@ -202,8 +202,8 @@ Summary(pl.UTF-8):	Pliki programistyczne biblioteki PCRE z obsługą znaków 32-
 Group:		Development/Libraries
 # base devel required for (common) headers and man page contents;
 # pulling base pcre doesn't hurt, as it's already required by some basic packages
-Requires:	%{name}-devel = %{version}-%{release}
-Requires:	pcre32 = %{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
+Requires:	pcre32%{?_isa} = %{version}-%{release}
 
 %description -n pcre32-devel
 Development files for PCRE library with 32-bit character support.
@@ -215,7 +215,7 @@ Pliki programistyczne biblioteki PCRE z obsługą znaków 32-bitowych.
 Summary:	Static PCRE library with 32-bit character support
 Summary(pl.UTF-8):	Biblioteka statyczna PCRE z obsługą znaków 32-bitowych
 Group:		Development/Libraries
-Requires:	pcre32-devel = %{version}-%{release}
+Requires:	pcre32-devel%{?_isa} = %{version}-%{release}
 
 %description -n pcre32-static
 Static PCRE library with 32-bit character support.
@@ -227,7 +227,7 @@ Biblioteka statyczna PCRE z obsługą znaków 32-bitowych.
 Summary:	Grep using Perl Compatible Regular Expressions
 Summary(pl.UTF-8):	Grep używający perlowych wyrażeń regularnych
 Group:		Applications/Text
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 Obsoletes:	pgrep
 
 %description -n pcregrep
@@ -242,9 +242,9 @@ perlowych wyrażeń regularnych, a nie posiksowych.
 Summary:	A program for testing Perl-compatible regular expressions
 Summary(pl.UTF-8):	Program do testowania kompatybilnych z perlem wyrażeń regularnych
 Group:		Applications/Text
-Requires:	%{name} = %{version}-%{release}
-%{?with_pcre16:Requires:	pcre16 = %{version}-%{release}}
-%{?with_pcre32:Requires:	pcre32 = %{version}-%{release}}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+%{?with_pcre16:Requires:	pcre16%{?_isa} = %{version}-%{release}}
+%{?with_pcre32:Requires:	pcre32%{?_isa} = %{version}-%{release}}
 
 %description -n pcretest
 pcretest is a program which you can use to test regular expression.
