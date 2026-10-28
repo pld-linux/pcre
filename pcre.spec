@@ -15,11 +15,11 @@ Version:	8.45
 Release:	2
 License:	BSD (see LICENCE)
 Group:		Libraries
-Source0:	https://ftp.pcre.org/pub/pcre/%{name}-%{version}.tar.bz2
+Source0:	https://downloads.sourceforge.net/pcre/%{name}-%{version}.tar.bz2
 # Source0-md5:	4452288e6a0eefb2ab11d36010a1eebb
 Patch0:		%{name}-pcreposix-glibc-conflict.patch
 Patch1:		pcre-8.41-fix_stack_estimator.patch
-URL:		http://www.pcre.org/
+URL:		https://www.pcre.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	bzip2-devel
